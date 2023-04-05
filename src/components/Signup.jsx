@@ -10,7 +10,8 @@ const BottomLinks = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-top: 2.5rem;
+  margin-top: 2rem;
+  padding-bottom: 2rem;
 `;
 
 const LinkGroup = styled.div`
@@ -38,7 +39,9 @@ const Signup = () => {
         container
         sx={{
           maxWidth: { xs: "100vw", md: "100vw" },
-          height: { xs: "auto", md: "100vh" },
+          height: { xs: "auto", md: "100vh" },          
+          paddingTop:{xs: "2rem", sm: "2rem"},
+          paddingBottom:{xs: "2rem", sm: "2rem"},
           background: "#0f212ebe",
           display: "flex",
           justifyContent: "center",
@@ -52,7 +55,7 @@ const Signup = () => {
           md={6}
           sx={{
             background: `url(${FormImg}) center`,
-            height: { xs: "70vh", md: "80vh" },
+            height: { xs: "70vh", md: "70vh" },
             maxWidth: { xs: "80vw", md: "70vh" },
             borderRadius: { xs: "1rem 1rem 0 0", md: "1rem 0 0 1rem" },
             display: "flex",
@@ -68,7 +71,7 @@ const Signup = () => {
           sm={12}
           md={6}
           sx={{
-            height: { xs: "70vh", md: "80vh" },
+            height: { xs: "70vh", md: "70vh" },
             maxWidth: { xs: "80vw", md: "70vh" },
             background: "#fff",
             borderRadius: { xs: "0 0 1rem 1rem", md: "0 1rem 1rem 0" },
@@ -117,7 +120,7 @@ const Signup = () => {
                 </div>
                 <div className="form-control" sx={{ mb: "1rem" }}>
                   <label htmlFor="password">
-                    Password<span className=".req">*</span>
+                    Password<span className="req">*</span>
                   </label>
                   <Field
                     name="password"
@@ -133,7 +136,7 @@ const Signup = () => {
                 </div>
                 <div className="form-control" sx={{ mb: "1rem" }}>
                   <label htmlFor="password">
-                    Password<span className=".req">*</span>
+                    Confirm Password<span className="req">*</span>
                   </label>
                   <Field
                     name="confirmPassword"
@@ -159,11 +162,10 @@ const Signup = () => {
           </Formik>
           <BottomLinks>
             <LinkGroup>
-              <Link
+            <Link
                 href="#"
-                color="#23235e"
+                color="#8d8d8da4"
                 underline="none"
-                sx={{ mr: "1rem" }}
               >
                 Contact us
               </Link>

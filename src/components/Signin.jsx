@@ -2,7 +2,7 @@ import { Box, Grid, Typography, Link } from "@mui/material";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { SubmitButton } from "./common/Button";
-import FormImg from "./../assets/FormImg.png";/* 
+import FormImg from "./../assets/FormImg.png"; /* 
 import TextError from "./common/TextError"; */
 import styled from "styled-components";
 
@@ -38,6 +38,8 @@ const Signin = () => {
         sx={{
           maxWidth: { xs: "100vw", md: "100vw" },
           height: { xs: "auto", md: "100vh" },
+          paddingTop: { xs: "2rem", sm: "2rem" },
+          paddingBottom: { xs: "2rem", sm: "2rem" },
           background: "#0f212ebe",
           display: "flex",
           justifyContent: "center",
@@ -51,8 +53,8 @@ const Signin = () => {
           md={6}
           sx={{
             background: `url(${FormImg}) center`,
-            height: { xs: "60vh", md: "60vh" },
-            maxWidth: { xs: "80vw", md: "60vh" },
+            height: { xs: "70vh", md: "70vh" },
+            maxWidth: { xs: "80vw", md: "70vh" },
             borderRadius: { xs: "1rem 1rem 0 0", md: "1rem 0 0 1rem" },
             display: "flex",
             justifyContent: "center",
@@ -67,7 +69,7 @@ const Signin = () => {
           sm={12}
           md={6}
           sx={{
-            height: { xs: "60vh", md: "60vh" },
+            height: { xs: "70vh", md: "70vh" },
             maxWidth: { xs: "80vw", md: "70vh" },
             background: "#fff",
             borderRadius: { xs: "0 0 1rem 1rem", md: "0 1rem 1rem 0" },
@@ -87,14 +89,16 @@ const Signin = () => {
               setSubmitting(false);
             }}
           >
-            {({ isSubmitting, errors, touched }) => (
+            {({ isSubmitting }) => (
               <Form>
                 <Typography
                   variant="h4"
                   component="h1"
                   color="#23235e"
                   gutterBottom
-                  sx={{ mb: "2rem" }}
+                  sx={{
+                    marginBottom: "1rem",
+                  }}
                 >
                   Sign In
                 </Typography>
@@ -116,7 +120,7 @@ const Signin = () => {
                 </div>
                 <div className="form-control" sx={{ mb: "1rem" }}>
                   <label htmlFor="password">
-                    Password<span className=".req">*</span>
+                    Password<span className="req">*</span>
                   </label>
                   <Field
                     name="password"
@@ -141,22 +145,35 @@ const Signin = () => {
             )}
           </Formik>
           <BottomLinks>
+            <Link
+              href="#"
+              color="#8d8d8da4"
+              underline="none"
+              sx={{ mr: "1rem" }}
+            >
+              Forgot Password?
+            </Link>
             <LinkGroup>
               <Link
                 href="#"
-                color="#23235e"
+                color="#8d8d8da4"
                 underline="none"
-                sx={{ mr: "1rem" }}
+                sx={{ mr: "0.5rem" }}
               >
-                Forgot Password?
+                Contact us
               </Link>
-              <Link href="#" color="#23235e" underline="none">
-                Resend Verification Email
+              <Link
+                href="#"
+                color="#8d8d8da4"
+                underline="none"
+                sx={{ mr: "0.5rem" }}
+              >
+                Terms
+              </Link>
+              <Link href="#" color="#8d8d8da4" underline="none">
+                Policy
               </Link>
             </LinkGroup>
-            <Link href="#" color="#23235e" underline="none">
-              Create Account
-            </Link>
           </BottomLinks>
         </Grid>
       </Grid>
