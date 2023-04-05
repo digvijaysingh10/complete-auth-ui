@@ -30,6 +30,7 @@ const useStyles = () => ({
     alignItems: "center",
     "@media (max-width: 600px)": {
       height: "auto",
+      width: "100vw"
     },
   },
   formImgContainer: {
@@ -38,7 +39,7 @@ const useStyles = () => ({
     width: "100%",
     borderRadius: "2rem 0 0 2rem",
     "@media (max-width: 600px)": {
-      height: "40vh",
+      height: "100vh",
       borderRadius: "2rem 2rem 0 0",
     },
   },
@@ -53,7 +54,7 @@ const useStyles = () => ({
     paddingRight: "2rem",
     textAlign: "center",
     "@media (max-width: 600px)": {
-      height: "auto",
+      height: "100vh",
       borderRadius: "2rem 2rem 0 0",
       paddingLeft: "1rem",
       paddingRight: "1rem",
@@ -147,7 +148,7 @@ const Signup = () => {
                   </div>
                   <div className="form-control">
                     <label htmlFor="password">
-                      Password<span className="req">*</span>
+                      Confirm Password<span className="req">*</span>
                     </label>
                     <Field
                       name="confirmPassword"
