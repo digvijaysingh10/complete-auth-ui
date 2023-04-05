@@ -87,7 +87,7 @@ const Signup = () => {
             initialValues={initialValues}
             validationSchema={validationSchema}
             onSubmit={(values, { setSubmitting }) => {
-              // make an API call to login the user
+              // make an API call to sign up the user
               setSubmitting(false);
             }}
           >
