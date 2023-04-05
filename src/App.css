@@ -54,6 +54,14 @@ input:focus {
 .dot {
   color: #1d4867be;
 }
+.aio{
+  color: purple;
+
+}
+.bussiness{
+  color: #E59446;
+
+}
 
 .fieldError {
   border-color: red;

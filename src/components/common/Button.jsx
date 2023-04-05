@@ -6,7 +6,7 @@ export const SubmitButton = styled.button`
   border-radius: 2rem;
   border: none;
   color: #fff;
-  background: #da2d92;
+  background: #e59446;
 `;
 
 const Button = () => {

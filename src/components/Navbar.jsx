@@ -48,7 +48,7 @@ function Navbar(props) {
             width: "8rem",
             borderRadius: "2rem",
             border: "none",
-            background: "#da2d92",
+            background: "#E59446",
           }}
         >
           Sign Up
@@ -90,7 +90,7 @@ function Navbar(props) {
                 width: "8rem",
                 borderRadius: "2rem",
                 border: "none",
-                background: "#da2d92",
+                background: "#E59446",
               }}
             >
               Sign Up
