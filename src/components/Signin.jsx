@@ -1,51 +1,62 @@
-import {Box, Grid, Typography, Link } from "@mui/material";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import { SubmitButton } from "./common/Button";
-import FormImg from "./../assets/FormImg.png";
-import TextError from "./common/TextError";
-import styled from "styled-components";
-import { useTheme } from "@mui/material/styles";
+import { Box, Grid, Typography, Link } from '@mui/material';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+import { SubmitButton } from './common/Button';
+import FormImg from './../assets/FormImg.png';
+import TextError from './common/TextError';
+import styled from 'styled-components';
+import { useTheme } from '@mui/material/styles';
 
-const styles = (theme) => ({
-  signInForm:{
-
+const useStyles = () => ({
+  signInForm: {
+    height: '100vh',
+    width: '100%',
+    maxWidth: '100vw',
+    background: '#0f212ebe',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    '@media (max-width: 600px)': {
+      height: 'auto',
+    },
   },
   formBody: {
-    height: "100vh",
-    width: "100%",
-    maxWidth: "100vw",
-    background: "#0f212ebe",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    [theme.breakpoints.down("sm")]: {
-      height: "auto", // adjust height for small screens
+    height: '100vh',
+    width: '100%',
+    maxWidth: '60vw',
+    background: '#0f212ebe',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    '@media (max-width: 600px)': {
+      height: 'auto',
     },
   },
   formImgContainer: {
     background: `url(${FormImg}) center`,
-    height: "60vh",
-    borderRadius: "2rem 0 0 2rem",
-    [theme.breakpoints.down("sm")]: {
-      height: "40vh", // adjust height for small screens
+    height: '60vh',
+    width: '100%',
+    borderRadius: '2rem 0 0 2rem',
+    '@media (max-width: 600px)': {
+      height: '40vh',
+      borderRadius: '2rem 2rem 0 0',
     },
   },
   mainForm: {
-    height: "60vh",
-    background: "#fff",
-    borderRadius: "0 2rem 2rem 0",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    paddingLeft: "2rem",
-    paddingRight: "2rem",
-    textAlign: "center",
-    [theme.breakpoints.down("sm")]: {
-      height: "auto", // adjust height for small screens
-      borderRadius: "2rem 2rem 0 0", // adjust border radius for small screens
-      paddingLeft: "1rem", // adjust padding for small screens
-      paddingRight: "1rem", // adjust padding for small screens
+    height: '60vh',
+    background: '#fff',
+    borderRadius: '0 2rem 2rem 0',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    paddingLeft: '2rem',
+    paddingRight: '2rem',
+    textAlign: 'center',
+    '@media (max-width: 600px)': {
+      height: 'auto',
+      borderRadius: '2rem 2rem 0 0',
+      paddingLeft: '1rem',
+      paddingRight: '1rem',
     },
   },
 });
@@ -63,20 +74,18 @@ const LinkGroup = styled.div`
 `;
 
 const initialValues = {
-  email: "",
-  password: "",
+  email: '',
+  password: '',
 };
 
 const validationSchema = Yup.object().shape({
-  email: Yup.string()
-    .email("Invalid email format")
-    .required("Email is required"),
-  password: Yup.string().required("Password is required"),
+  email: Yup.string().email('Invalid email format').required('Email is required'),
+  password: Yup.string().required('Password is required'),
 });
 
 const Signin = () => {
   const theme = useTheme();
-  const classes = styles(theme);
+  const classes = useStyles(theme);
 
   const onSubmit = (values, { setSubmitting }) => {
     // make an API call to login the user
@@ -86,22 +95,13 @@ const Signin = () => {
   return (
     <>
       <Box className={classes.signInForm}>
-        <Grid container style={styles(theme).formBody}>
-          <Grid item xs={12} md={6} style={styles(theme).formImgContainer} />
-          <Grid item xs={12} md={6} style={styles(theme).mainForm}>
-            <Formik
-              initialValues={initialValues}
-              validationSchema={validationSchema}
-              onSubmit={onSubmit}
-            >
+        <Grid container style={classes.formBody}>
+          <Grid item xs={12} md={6} style={classes.formImgContainer} />
+          <Grid item xs={12} md={6} style={classes.mainForm}>
+            <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
               {({ isSubmitting, errors, touched }) => (
                 <Form>
-                  <Typography
-                    variant="h4"
-                    component="h1"
-                    color="#23235e"
-                    gutterBottom
-                  >
+                  <Typography variant="h4" component="h1" color="#23235e" gutterBottom>
                     Sign In
                   </Typography>
                   <div className="form-control">
