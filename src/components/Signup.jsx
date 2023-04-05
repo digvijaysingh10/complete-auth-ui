@@ -34,7 +34,7 @@ const useStyles = () => ({
   },
   formImgContainer: {
     background: `url(${FormImg}) center`,
-    height: "60vh",
+    height: "80vh",
     width: "100%",
     borderRadius: "2rem 0 0 2rem",
     "@media (max-width: 600px)": {
@@ -43,7 +43,7 @@ const useStyles = () => ({
     },
   },
   mainForm: {
-    height: "60vh",
+    height: "80vh",
     background: "#fff",
     borderRadius: "0 2rem 2rem 0",
     display: "flex",
@@ -164,24 +164,21 @@ const Signup = () => {
                       component={TextError}
                     />
                   </div>
+                  <div className="checkBoxContainer">
+                    <input type="checkbox" required />
+                    <p>
+                      By signing up I agree to the <span className="cbox">terms of use</span> and
+                      processing my personal data as started in the{" "}
+                      <span className="cbox">privacy policy</span>
+                    </p>
+                  </div>
                   <SubmitButton disabled={isSubmitting} type="submit">
                     Sign Up
                   </SubmitButton>
                   <BottomLinks>
                     <LinkGroup>
                       <Link href="#" underline="none" p={1} color="#8d8d8da4">
-                        Forgot Password?
-                      </Link>
-                    </LinkGroup>
-                    <LinkGroup>
-                      <Link href="#" underline="none" p={1} color="#8d8d8da4">
                         Contact Us
-                      </Link>
-                      <Link href="#" underline="none" p={1} color="#8d8d8da4">
-                        Terms
-                      </Link>
-                      <Link href="#" underline="none" p={1} color="#8d8d8da4">
-                        Policy
                       </Link>
                     </LinkGroup>
                   </BottomLinks>

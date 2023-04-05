@@ -56,3 +56,11 @@ input[type="password"]:focus {
     font-size: 0.5rem;
   }
 }
+.cbox{
+  color: blue;
+}
+.checkBoxContainer{
+  display: flex;
+  flex-direction: row;
+  text-align: left;
+}
