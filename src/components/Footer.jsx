@@ -35,7 +35,7 @@ const Footer = () => {
               <li>About</li>
               <li>News & Blog</li>
               <li>Press about us</li>
-              <li>Our Partners</li>
+              <li>Our partners</li>
             </ul>
           </Grid>
           <Grid item sm={12} md={3}>
@@ -43,9 +43,9 @@ const Footer = () => {
               Help & Support
             </Typography>
             <ul>
-              <li></li>
-              <li></li>
-              <li></li>
+              <li>Support</li>
+              <li>FAQ</li>
+              <li>Supported Exchange</li>
             </ul>
           </Grid>
           <Grid item sm={12} md={3}>
@@ -53,8 +53,8 @@ const Footer = () => {
               Tool
             </Typography>
             <ul>
-              <li></li>
-              <li></li>
+              <li>Exchange Widgit</li>
+              <li>Paymet Button</li>
             </ul>
           </Grid>
         </Grid>
