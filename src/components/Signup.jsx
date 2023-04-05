@@ -2,65 +2,9 @@ import { Box, Grid, Typography, Link } from "@mui/material";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { SubmitButton } from "./common/Button";
-import FormImg from "./../assets/FormImg.png";
-import TextError from "./common/TextError";
+import FormImg from "./../assets/FormImg.png"; /* 
+import TextError from "./common/TextError"; */
 import styled from "styled-components";
-import { useTheme } from "@mui/material/styles";
-
-const useStyles = () => ({
-  signInForm: {
-    height: "100vh",
-    width: "100%",
-    maxWidth: "100vw",
-    background: "#0f212ebe",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    "@media (max-width: 600px)": {
-      height: "auto",
-    },
-  },
-  formBody: {
-    height: "100vh",
-    width: "100%",
-    maxWidth: "60vw",
-    background: "#0f212ebe",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    "@media (max-width: 600px)": {
-      height: "auto",
-      width: "100vw"
-    },
-  },
-  formImgContainer: {
-    background: `url(${FormImg}) center`,
-    height: "80vh",
-    width: "100%",
-    borderRadius: "2rem 0 0 2rem",
-    "@media (max-width: 600px)": {
-      height: "100vh",
-      borderRadius: "2rem 2rem 0 0",
-    },
-  },
-  mainForm: {
-    height: "80vh",
-    background: "#fff",
-    borderRadius: "0 2rem 2rem 0",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    paddingLeft: "2rem",
-    paddingRight: "2rem",
-    textAlign: "center",
-    "@media (max-width: 600px)": {
-      height: "100vh",
-      borderRadius: "2rem 2rem 0 0",
-      paddingLeft: "1rem",
-      paddingRight: "1rem",
-    },
-  },
-});
 
 const BottomLinks = styled.div`
   display: flex;
@@ -77,6 +21,7 @@ const LinkGroup = styled.div`
 const initialValues = {
   email: "",
   password: "",
+  confirmPassword: "",
 };
 
 const validationSchema = Yup.object().shape({
@@ -87,109 +32,146 @@ const validationSchema = Yup.object().shape({
 });
 
 const Signup = () => {
-  const theme = useTheme();
-  const classes = useStyles(theme);
-
-  const onSubmit = (values, { setSubmitting }) => {
-    // make an API call to login the user
-    setSubmitting(false);
-  };
-
   return (
-    <>
-      <Box className={classes.signInForm}>
-        <Grid container style={classes.formBody}>
-          <Grid item xs={12} md={6} style={classes.formImgContainer} />
-          <Grid item xs={12} md={6} style={classes.mainForm}>
-            <Formik
-              initialValues={initialValues}
-              validationSchema={validationSchema}
-              onSubmit={onSubmit}
-            >
-              {({ isSubmitting, errors, touched }) => (
-                <Form>
-                  <Typography
-                    variant="h4"
-                    component="h1"
-                    color="#23235e"
-                    gutterBottom
-                  >
-                    Sign Up
-                  </Typography>
-                  <div className="form-control">
-                    <label htmlFor="email">
-                      Email address<span className="req">*</span>
-                    </label>
-                    <Field
-                      name="email"
-                      type="email"
-                      placeholder="Enter your email address"
-                      className={
-                        errors.email && touched.email ? "fieldError" : null
-                      }
-                    />
-                    <ErrorMessage name="email" component={TextError} />
-                  </div>
-                  <div className="form-control">
-                    <label htmlFor="password">
-                      Password<span className="req">*</span>
-                    </label>
-                    <Field
-                      name="password"
-                      type="password"
-                      placeholder="Enter your password"
-                      className={
-                        errors.password && touched.password
-                          ? "fieldError"
-                          : null
-                      }
-                    />
-                    <ErrorMessage name="password" component={TextError} />
-                  </div>
-                  <div className="form-control">
-                    <label htmlFor="password">
-                      Confirm Password<span className="req">*</span>
-                    </label>
-                    <Field
-                      name="confirmPassword"
-                      type="password"
-                      placeholder="Enter your confirm password"
-                      className={
-                        errors.password && touched.password
-                          ? "fieldError"
-                          : null
-                      }
-                    />
-                    <ErrorMessage
-                      name="confirmPassword"
-                      component={TextError}
-                    />
-                  </div>
-                  <div className="checkBoxContainer">
-                    <input type="checkbox" required />
-                    <p>
-                      By signing up I agree to the <span className="cbox">terms of use</span> and
-                      processing my personal data as started in the{" "}
-                      <span className="cbox">privacy policy</span>
-                    </p>
-                  </div>
-                  <SubmitButton disabled={isSubmitting} type="submit">
-                    Sign Up
-                  </SubmitButton>
-                  <BottomLinks>
-                    <LinkGroup>
-                      <Link href="#" underline="none" p={1} color="#8d8d8da4">
-                        Contact Us
-                      </Link>
-                    </LinkGroup>
-                  </BottomLinks>
-                </Form>
-              )}
-            </Formik>
-          </Grid>
+    <Box>
+      <Grid
+        container
+        sx={{
+          maxWidth: { xs: "100vw", md: "100vw" },
+          height: { xs: "auto", md: "100vh" },
+          background: "#0f212ebe",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Grid
+          item
+          xs={12}
+          sm={12}
+          md={6}
+          sx={{
+            background: `url(${FormImg}) center`,
+            height: { xs: "70vh", md: "80vh" },
+            maxWidth: { xs: "80vw", md: "70vh" },
+            borderRadius: { xs: "1rem 1rem 0 0", md: "1rem 0 0 1rem" },
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            backgroundSize: "cover",
+          }}
+        />
+
+        <Grid
+          item
+          xs={12}
+          sm={12}
+          md={6}
+          sx={{
+            height: { xs: "70vh", md: "80vh" },
+            maxWidth: { xs: "80vw", md: "70vh" },
+            background: "#fff",
+            borderRadius: { xs: "0 0 1rem 1rem", md: "0 1rem 1rem 0" },
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            paddingLeft: { xs: "1rem", md: "2rem" },
+            paddingRight: { xs: "2rem", md: "2rem" },
+            textAlign: "center",
+          }}
+        >
+          <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={(values, { setSubmitting }) => {
+              // make an API call to login the user
+              setSubmitting(false);
+            }}
+          >
+            {({ isSubmitting, errors, touched }) => (
+              <Form>
+                <Typography
+                  variant="h4"
+                  component="h1"
+                  color="#23235e"
+                  gutterBottom
+                  sx={{ mb: "2rem" }}
+                >
+                  Sign Up
+                </Typography>
+                <div className="form-control" sx={{ mb: "1rem" }}>
+                  <label htmlFor="email">
+                    Email address<span className="req">*</span>
+                  </label>
+                  <Field
+                    name="email"
+                    type="email"
+                    placeholder="Enter your email address"
+                    className="email-field"
+                  />
+                  <ErrorMessage
+                    name="email"
+                    component="div"
+                    className="error"
+                  />
+                </div>
+                <div className="form-control" sx={{ mb: "1rem" }}>
+                  <label htmlFor="password">
+                    Password<span className=".req">*</span>
+                  </label>
+                  <Field
+                    name="password"
+                    type="password"
+                    placeholder="Enter your password"
+                    className="password-field"
+                  />
+                  <ErrorMessage
+                    name="password"
+                    component="div"
+                    className="error"
+                  />
+                </div>
+                <div className="form-control" sx={{ mb: "1rem" }}>
+                  <label htmlFor="password">
+                    Password<span className=".req">*</span>
+                  </label>
+                  <Field
+                    name="confirmPassword"
+                    type="password"
+                    placeholder="Confirm password"
+                    className="password-field"
+                  />
+                  <ErrorMessage
+                    name="confirmPassword"
+                    component="div"
+                    className="error"
+                  />
+                </div>
+
+                <SubmitButton
+                  disabled={isSubmitting}
+                  sx={{ width: "100%", mt: "2rem" }}
+                >
+                  {isSubmitting ? "Signing in..." : "Sign in"}
+                </SubmitButton>
+              </Form>
+            )}
+          </Formik>
+          <BottomLinks>
+            <LinkGroup>
+              <Link
+                href="#"
+                color="#23235e"
+                underline="none"
+                sx={{ mr: "1rem" }}
+              >
+                Contact us
+              </Link>
+            </LinkGroup>
+          </BottomLinks>
         </Grid>
-      </Box>
-    </>
+      </Grid>
+    </Box>
   );
 };
 

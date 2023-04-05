@@ -53,7 +53,6 @@ const Signin = () => {
             background: `url(${FormImg}) center`,
             height: { xs: "60vh", md: "60vh" },
             maxWidth: { xs: "80vw", md: "60vh" },
-            padding:{xs: "1rem", md: "2rem" },
             borderRadius: { xs: "1rem 1rem 0 0", md: "1rem 0 0 1rem" },
             display: "flex",
             justifyContent: "center",
@@ -69,14 +68,14 @@ const Signin = () => {
           md={6}
           sx={{
             height: { xs: "60vh", md: "60vh" },
-            maxWidth: { xs: "80vw", md: "60vh" },
+            maxWidth: { xs: "80vw", md: "70vh" },
             background: "#fff",
             borderRadius: { xs: "0 0 1rem 1rem", md: "0 1rem 1rem 0" },
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
             paddingLeft: { xs: "1rem", md: "2rem" },
-            paddingRight: { xs: "1rem", md: "2rem" },
+            paddingRight: { xs: "2rem", md: "2rem" },
             textAlign: "center",
           }}
         >
@@ -134,7 +133,7 @@ const Signin = () => {
 
                 <SubmitButton
                   disabled={isSubmitting}
-                  sx={{ width: "100%", mt: "2rem" }}
+                  sx={{ width: "100%", marginTop: "2rem" }}
                 >
                   {isSubmitting ? "Signing in..." : "Sign in"}
                 </SubmitButton>
