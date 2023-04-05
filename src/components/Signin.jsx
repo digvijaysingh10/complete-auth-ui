@@ -144,7 +144,7 @@ const Signin = () => {
               </Form>
             )}
           </Formik>
-          <BottomLinks>
+          <BottomLinks sx={{ maxWidth: { xs: "80vw", md: "70vh" } }}>
             <Link
               href="#"
               color="#8d8d8da4"
