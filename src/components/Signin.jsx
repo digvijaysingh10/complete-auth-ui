@@ -2,8 +2,7 @@ import { Box, Grid, Typography, Link } from "@mui/material";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { SubmitButton } from "./common/Button";
-import FormImg from "./../assets/FormImg.png"; /* 
-import TextError from "./common/TextError"; */
+import FormImg from "./../assets/FormImg-removebg.png";
 import styled from "styled-components";
 
 const BottomLinks = styled.div`
@@ -52,7 +51,7 @@ const Signin = () => {
           sm={12}
           md={6}
           sx={{
-            background: `url(${FormImg}) center`,
+            background: `#0f212e url(${FormImg}) center`,
             height: { xs: "70vh", md: "70vh" },
             maxWidth: { xs: "80vw", md: "70vh" },
             borderRadius: { xs: "1rem 1rem 0 0", md: "1rem 0 0 1rem" },
