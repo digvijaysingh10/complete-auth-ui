@@ -12,7 +12,7 @@ const Footer = () => {
         sx={{
           background: "#0f212e",
           bottom: "0",
-          height: { xs: "auto", md: "20vh" },
+          height: { xs: "auto", md: "28vh" },
           padding: "2rem",
           color: "#fff",
           textAlign: { xs: "center", md: "left" },
