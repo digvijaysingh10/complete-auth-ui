@@ -13,8 +13,7 @@ const Footer = () => {
           background: "#0f212e",
           bottom: "0",
           height: { xs: "auto", md: "40vh" },
-          padding: "2rem" /* 
-          display:'flex', */,
+          padding: "2rem" 
         }}
       >
         <Grid container>
