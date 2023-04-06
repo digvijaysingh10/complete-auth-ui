@@ -101,12 +101,14 @@ const Signup = () => {
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
-            onSubmit={(values, { setSubmitting }) => {
-              // make an API call to sign up the user
-              setSubmitting(false);
+            onSubmit={(values,  onSubmitProps ) => {
+              console.log('Form Data', values)
+              console.log('Submit Props', onSubmitProps)
+              onSubmitProps.setSubmitting(false);
+              onSubmitProps.reste();
             }}
           >
-            {({ isSubmitting, errors, touched }) => (
+            {({ isSubmitting }) => (
               <Form>
                 <Typography
                   variant="h4"

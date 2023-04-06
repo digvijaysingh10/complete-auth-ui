@@ -93,9 +93,11 @@ const Signin = () => {
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
-            onSubmit={(values, { setSubmitting }) => {
-              // make an API call to login the user
-              setSubmitting(false);
+            onSubmit={(values,  onSubmitProps ) => {
+              console.log('Form Data', values)
+              console.log('Submit Props', onSubmitProps)
+              onSubmitProps.setSubmitting(false);
+              onSubmitProps.reste();
             }}
           >
             {({ isSubmitting }) => (
