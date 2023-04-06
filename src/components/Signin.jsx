@@ -196,7 +196,6 @@ const Signin = () => {
               <Button
                 sx={{
                   color: "#8d8d8da4",
-                  fontSize: { sm: "5px" },
                   textTransform: "none",
                 }}
                 component={Link}
@@ -207,7 +206,6 @@ const Signin = () => {
               <Button
                 sx={{
                   color: "#8d8d8da4",
-                  fontSize: { sm: "5px" },
                   textTransform: "none",
                 }}
                 component={Link}
@@ -218,7 +216,6 @@ const Signin = () => {
               <Button
                 sx={{
                   color: "#8d8d8da4",
-                  fontSize: { sm: "5px" },
                   textTransform: "none",
                 }}
                 component={Link}
