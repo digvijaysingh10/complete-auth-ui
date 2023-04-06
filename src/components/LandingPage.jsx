@@ -20,7 +20,7 @@ const LandingPage = () => {
             padding: "3rem",
           }}
         >
-          <Typography variant="h1" sx={{ fontWeight: "700", color: "#fff" }}>
+          <Typography variant="h1" sx={{ fontWeight: "700", fontSize:{xs: "3rem", md: "7rem"}, color: "#fff" }}>
             <span className="aio">All-in-one</span> platfrom for running{" "}
             <span className="bussiness">business</span>
           </Typography>
