@@ -4,7 +4,9 @@ import * as Yup from "yup";
 import { SubmitButton } from "./common/Button";
 import FormImg from "./../assets/FormImg-removebg.png";
 import styled from "styled-components";
-import Axios from 'axios';
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const BottomLinks = styled.div`
   display: flex;
@@ -44,6 +46,8 @@ const validationSchema = Yup.object().shape({
 });
 
 const Signin = () => {
+  const url = 'http://localhost:8080';
+  const navigate = useNavigate();
   return (
     <Box>
       <Grid
@@ -97,25 +101,38 @@ const Signin = () => {
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
-            onSubmit={async (values, onSubmitProps) => {
-              console.log("Form Data", values);
-              console.log("Submit Props", onSubmitProps);
-                const res = await Axios({
-                  method: "POST",
-                  url: "http://localhost:8080/signup",
+            onSubmit={async(formdata, { setSubmitting }) => {
+              // make an API call to login the user
+              setSubmitting(false);
+              const res = await axios(url+'/user/auth', {
+                method: 'POST',
+                body : JSON.stringify(formdata),
+                headers: {
+                  'Content-Type' : 'application/json'
+                }
+              })
           
-                  data: {
-                    email: values.email,
-                    password: values.password
-                  },
-                }).then((response) => {
-                  console.log(response);
-                })
-                .catch((error) => {
-                  console.error(error);
-                });
-              onSubmitProps.setSubmitting(false);
-              onSubmitProps.resetForm();
+              console.log(res.status);
+              if(res.status===201){
+                const userdata = (await res.json()).result;
+                //success alert
+                Swal.fire(
+                  'Hurray!',
+                  'Login Successful',
+                  'success'
+                )
+                console.log(userdata);
+                navigate("/");
+                
+                
+              }else{
+                // fail alert
+                Swal.fire(
+                  'Oops...',
+                  'Login Unsuccessful',
+                  'error'
+                )
+              }
             }}
           >
             {({ isSubmitting }) => (

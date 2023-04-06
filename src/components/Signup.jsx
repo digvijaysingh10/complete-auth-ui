@@ -4,7 +4,8 @@ import * as Yup from "yup";
 import { SubmitButton } from "./common/Button";
 import FormImg from "./../assets/FormImg-removebg.png";
 import styled from "styled-components";
-import axios from "axios"
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const BottomLinks = styled.div`
   display: flex;
@@ -49,6 +50,9 @@ const validationSchema = Yup.object().shape({
 });
 
 const Signup = () => {
+
+  const url = 'http://localhost:8080';
+
   return (
     <Box>
       <Grid
@@ -102,30 +106,33 @@ const Signup = () => {
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
-            onSubmit={ async(values, onSubmitProps) => {
-              try{
-              console.log("Form Data", values);
-              console.log("Submit Props", onSubmitProps);
-              const res = await axios({
-                method: "POST",
-                url: "http://localhost:8080/signup",
-        
-                data: {
-                  email: values.email,
-                  password: values.password
-                },
-              }).then((response) => {
-                console.log(response);
+            onSubmit={async (formdata, { setSubmitting }) => {
+              // make an API call to sign up the user
+              setSubmitting(false);
+              const res = await axios(url + '/user/add', {
+                method: 'POST',
+                body: JSON.stringify(formdata),
+                headers: {
+                  'Content-Type': 'application/json'
+                }
               })
-              .catch((error) => {
-                console.error(error);
-              });
-
-              onSubmitProps.setSubmitting(false);
-              onSubmitProps.resetForm();
-              }catch(err){console.log(
-                "err",err
-              );}
+              console.log(res.status);
+              if(res.status===201){
+                //success alert
+                Swal.fire(
+                  'Hurray!',
+                  'Signup Successful',
+                  'success'
+                )
+                console.log('signup success');
+              }else{
+                // fail alert
+                Swal.fire(
+                  'Oops...',
+                  'Signup Unsuccessful',
+                  'error'
+                )
+              }
             }}
           >
             {({ isSubmitting }) => (
