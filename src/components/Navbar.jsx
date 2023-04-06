@@ -30,7 +30,14 @@ function Navbar(props) {
     >
       <Logo />
       <Divider />
-      <List>
+      <List
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         <Button sx={{ color: "#fff" }} component={Link} to="/">
           Home
         </Button>
