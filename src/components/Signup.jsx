@@ -105,7 +105,7 @@ const Signup = () => {
               console.log('Form Data', values)
               console.log('Submit Props', onSubmitProps)
               onSubmitProps.setSubmitting(false);
-              onSubmitProps.reste();
+              onSubmitProps.reset();
             }}
           >
             {({ isSubmitting }) => (
