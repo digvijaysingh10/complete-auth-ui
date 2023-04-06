@@ -121,7 +121,7 @@ const Signin = () => {
                 navigate("/");
               } else {
                 // fail alert
-                Swal.fire("Oops...", "Login Unsuccessful", "error");
+                Swal.fire("Oops...", "Invalid credentials", "error");
               }
             }}
           >
