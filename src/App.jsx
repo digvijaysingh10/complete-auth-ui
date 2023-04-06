@@ -1,5 +1,6 @@
 import "./App.css";
 import Footer from "./components/Footer";
+import ForgetPassword from "./components/ForgetPassword";
 import LandingPage from "./components/LandingPage";
 import Navbar from "./components/Navbar";
 import Signin from "./components/Signin";
@@ -14,6 +15,7 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/signin" element={<Signin />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/forget" element={<ForgetPassword />} />
       </Routes>
       <Footer />
     </Router>

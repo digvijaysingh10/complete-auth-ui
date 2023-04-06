@@ -1,11 +1,12 @@
-import { Box, Grid, Typography, Link } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
+import Button from "@mui/material/Button";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { SubmitButton } from "./common/Button";
 import FormImg from "./../assets/FormImg-removebg.png";
 import styled from "styled-components";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const BottomLinks = styled.div`
   display: flex;
@@ -13,7 +14,8 @@ const BottomLinks = styled.div`
   justify-content: space-between;
   margin-top: 2.5rem;
   @media (max-width: 480px) {
-    font-size: 14px;
+    font-size: 10px;
+    text-align: left;
   }
 `;
 
@@ -179,34 +181,51 @@ const Signin = () => {
             )}
           </Formik>
           <BottomLinks sx={{ maxWidth: { xs: "80vw", md: "70vh" } }}>
-            <Link
-              href="#"
-              color="#8d8d8da4"
-              underline="none"
-              sx={{ mr: "1rem" }}
+            <Button
+              sx={{
+                color: "#8d8d8da4",
+                fontSize: { sm: "5px" },
+                textTransform: "none",
+              }}
+              component={Link}
+              to="/forget"
             >
-              Forgot Password?
-            </Link>
+              Forget password?
+            </Button>
             <LinkGroup>
-              <Link
-                href="#"
-                color="#8d8d8da4"
-                underline="none"
-                sx={{ mr: "0.5rem" }}
+              <Button
+                sx={{
+                  color: "#8d8d8da4",
+                  fontSize: { sm: "5px" },
+                  textTransform: "none",
+                }}
+                component={Link}
+                to="/forget"
               >
                 Contact us
-              </Link>
-              <Link
-                href="#"
-                color="#8d8d8da4"
-                underline="none"
-                sx={{ mr: "0.5rem" }}
+              </Button>
+              <Button
+                sx={{
+                  color: "#8d8d8da4",
+                  fontSize: { sm: "5px" },
+                  textTransform: "none",
+                }}
+                component={Link}
+                to="/forget"
               >
                 Terms
-              </Link>
-              <Link href="#" color="#8d8d8da4" underline="none">
+              </Button>
+              <Button
+                sx={{
+                  color: "#8d8d8da4",
+                  fontSize: { sm: "5px" },
+                  textTransform: "none",
+                }}
+                component={Link}
+                to="/forget"
+              >
                 Policy
-              </Link>
+              </Button>
             </LinkGroup>
           </BottomLinks>
         </Grid>

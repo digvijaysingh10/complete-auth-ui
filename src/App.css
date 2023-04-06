@@ -18,7 +18,7 @@
 
 label {
   text-align: left;
-  margin-left: 2rem;
+  margin-left: 3rem;
   margin-right: auto;
   margin-bottom: 0.2rem;
 }
@@ -46,7 +46,7 @@ input:focus {
 .error {
   color: red;
   font-size: 14px;
-  margin-left: 2rem;
+  margin-left: 3rem;
 }
 .req {
   color: red;
@@ -65,6 +65,30 @@ input:focus {
 
 .fieldError {
   border-color: red;
+}
+@media (max-width: 1024px) {
+  .form-control {
+    padding: 0;
+  }
+  input {
+    height: 2.5rem;
+    width: 100%;
+    max-width: 100%;
+    border-radius: 2rem;
+    border: 1px solid #ccc;
+    padding-left: 0.5rem;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+  label {
+    text-align: left;
+    margin-left: 0.5rem;
+    margin-right: auto;
+  }
+  .error {
+    font-size: 14px;
+    margin-left: 0.5rem;
+  }
 }
 @media (max-width: 768px) {
   .form-control {

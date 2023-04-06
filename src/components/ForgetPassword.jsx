@@ -1,29 +1,13 @@
-import { Box, Grid, Typography, Link } from "@mui/material";
+import { Box, Grid, Typography} from "@mui/material";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { SubmitButton } from "./common/Button";
 import FormImg from "./../assets/FormImg-removebg.png";
-import styled from "styled-components";
-import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
-
-const BottomLinks = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-top: 2rem;
-  padding-bottom: 2rem;
-`;
-
-const LinkGroup = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
+/* import Swal from "sweetalert2"; */
 
 const initialValues = {
   email: "",
   password: "",
-  confirmPassword: "",
 };
 
 const validationSchema = Yup.object().shape({
@@ -34,25 +18,10 @@ const validationSchema = Yup.object().shape({
       "Enter vailid mail."
     )
     .required("Email address is required."),
-  password: Yup.string()
-    .min(8)
-    .matches(
-      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])(?=.*\W).{8,}$/,
-      "Password must contain min. 1 numeric, symbol, capital character."
-    )
-    .required("Password is required."),
-  confirmPassword: Yup.string()
-    .required("Confirm password is required.")
-    .oneOf(
-      [Yup.ref("password"), null],
-      "Confirm password must match with password"
-    ),
 });
 
-const Signup = () => {
-  const url = "http://localhost:8080";
-  const navigate = useNavigate();
-
+const ForgetPassword = () => {
+  /* const url = "http://localhost:8080"; */
   return (
     <Box>
       <Grid
@@ -106,26 +75,27 @@ const Signup = () => {
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
-            onSubmit={async (formdata, { setSubmitting }) => {
+            /* onSubmit={async (formdata, { setSubmitting }) => {
               setSubmitting(false);
-              const res = await fetch(url + "/user/add", {
+              const res = await fetch(url + "/user/auth", {
                 method: "POST",
                 body: JSON.stringify(formdata),
                 headers: {
                   "Content-Type": "application/json",
                 },
               });
+
               console.log(res.status);
               if (res.status === 201) {
+                const userdata = (await res.json()).result;
                 //success alert
-                Swal.fire("Hurray!", "Signup Successful", "success");
-                console.log("signup success");
-                navigate("/signin");
+                Swal.fire("Hurray!", "OTP sent", "success");
+                console.log(userdata);
               } else {
                 // fail alert
-                Swal.fire("Oops...", "Signup Unsuccessful", "error");
+                Swal.fire("Oops...", "Email not registered", "error");
               }
-            }}
+            }} */
           >
             {({ isSubmitting }) => (
               <Form>
@@ -134,9 +104,11 @@ const Signup = () => {
                   component="h1"
                   color="#23235e"
                   gutterBottom
-                  sx={{ mb: "2rem" }}
+                  sx={{
+                    marginBottom: "1rem",
+                  }}
                 >
-                  Sign Up
+                  Forget Password
                 </Typography>
                 <div className="form-control" sx={{ mb: "1rem" }}>
                   <label htmlFor="email">
@@ -154,59 +126,19 @@ const Signup = () => {
                     className="error"
                   />
                 </div>
-                <div className="form-control" sx={{ mb: "1rem" }}>
-                  <label htmlFor="password">
-                    Password<span className="req">*</span>
-                  </label>
-                  <Field
-                    name="password"
-                    type="password"
-                    placeholder="Enter your password"
-                    className="password-field"
-                  />
-                  <ErrorMessage
-                    name="password"
-                    component="div"
-                    className="error"
-                  />
-                </div>
-                <div className="form-control" sx={{ mb: "1rem" }}>
-                  <label htmlFor="password">
-                    Confirm Password<span className="req">*</span>
-                  </label>
-                  <Field
-                    name="confirmPassword"
-                    type="password"
-                    placeholder="Confirm password"
-                    className="password-field"
-                  />
-                  <ErrorMessage
-                    name="confirmPassword"
-                    component="div"
-                    className="error"
-                  />
-                </div>
-
                 <SubmitButton
                   disabled={isSubmitting}
-                  sx={{ width: "100%", mt: "2rem" }}
+                  sx={{ width: "100%", marginTop: "2rem" }}
                 >
-                  {isSubmitting ? "Signing up..." : "Sign up"}
+                  {isSubmitting ? "Sending OTP..." : "Send OTP"}
                 </SubmitButton>
               </Form>
             )}
           </Formik>
-          <BottomLinks>
-            <LinkGroup>
-              <Link href="#" color="#8d8d8da4" underline="none">
-                Contact us
-              </Link>
-            </LinkGroup>
-          </BottomLinks>
         </Grid>
       </Grid>
     </Box>
   );
 };
 
-export default Signup;
+export default ForgetPassword;
