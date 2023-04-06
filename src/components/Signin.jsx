@@ -24,9 +24,19 @@ const initialValues = {
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
-    .email("Invalid email format")
-    .required("Email is required"),
-  password: Yup.string().required("Password is required"),
+    .email()
+    .matches(
+      /^([A-Za-z0-9_]+[-.]?[A-Za-z0-9_]+)+@(?!(?:[A-Za-z0-9_]+\.)?([A-Za-z]{1,3})\.)([A-Za-z0-9_]+[-.]?[A-Za-z0-9_]+)+\.([A-Za-z]{2,4})$/,
+      "Enter vailid mail."
+    )
+    .required("Email address is required."),
+  password: Yup.string()
+    .min(8)
+    .matches(
+      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])(?=.*\W).{8,}$/,
+      "Password must contain min. 1 numeric, symbol, capital character."
+    )
+    .required("Password is required."),
 });
 
 const Signin = () => {

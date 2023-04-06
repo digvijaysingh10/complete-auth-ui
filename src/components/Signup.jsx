@@ -26,9 +26,25 @@ const initialValues = {
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
-    .email("Invalid email format")
-    .required("Email is required"),
-  password: Yup.string().required("Password is required"),
+    .email()
+    .matches(
+      /^([A-Za-z0-9_]+[-.]?[A-Za-z0-9_]+)+@(?!(?:[A-Za-z0-9_]+\.)?([A-Za-z]{1,3})\.)([A-Za-z0-9_]+[-.]?[A-Za-z0-9_]+)+\.([A-Za-z]{2,4})$/,
+      "Enter vailid mail."
+    )
+    .required("Email address is required."),
+  password: Yup.string()
+    .min(8)
+    .matches(
+      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])(?=.*\W).{8,}$/,
+      "Password must contain min. 1 numeric, symbol, capital character."
+    )
+    .required("Password is required."),
+  confirmPassword: Yup.string()
+    .required("Confirm password is required.")
+    .oneOf(
+      [Yup.ref("password"), null],
+      "Confirm password must match with password"
+    ),
 });
 
 const Signup = () => {
@@ -38,9 +54,9 @@ const Signup = () => {
         container
         sx={{
           maxWidth: { xs: "100vw", md: "100vw" },
-          height: { xs: "auto", md: "100vh" },          
-          paddingTop:{xs: "2rem", sm: "2rem"},
-          paddingBottom:{xs: "2rem", sm: "2rem"},
+          height: { xs: "auto", md: "100vh" },
+          paddingTop: { xs: "2rem", sm: "2rem" },
+          paddingBottom: { xs: "2rem", sm: "2rem" },
           background: "#0f212ebe",
           display: "flex",
           justifyContent: "center",
@@ -161,11 +177,7 @@ const Signup = () => {
           </Formik>
           <BottomLinks>
             <LinkGroup>
-            <Link
-                href="#"
-                color="#8d8d8da4"
-                underline="none"
-              >
+              <Link href="#" color="#8d8d8da4" underline="none">
                 Contact us
               </Link>
             </LinkGroup>

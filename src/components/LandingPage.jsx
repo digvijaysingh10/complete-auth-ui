@@ -1,4 +1,5 @@
 import { Box, Typography, Button, Stack } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const LandingPage = () => {
   return (
@@ -13,18 +14,27 @@ const LandingPage = () => {
         <Stack
           sx={{
             display: "flex",
-            flexWrap:'wrap',
+            flexWrap: "wrap",
             justifyContent: "center",
             alignItems: "center",
             textAlign: "center",
             padding: "3rem",
           }}
         >
-          <Typography variant="h1" sx={{ fontWeight: "700", fontSize:{xs: "3rem", md: "7rem"}, color: "#fff" }}>
+          <Typography
+            variant="h1"
+            sx={{
+              fontWeight: "700",
+              fontSize: { xs: "3rem", md: "7rem" },
+              color: "#fff",
+            }}
+          >
             <span className="aio">All-in-one</span> platfrom for running{" "}
             <span className="bussiness">business</span>
           </Typography>
           <Button
+            component={Link}
+            to="/signup"
             sx={{
               color: "#fff",
               height: "2.5rem",
