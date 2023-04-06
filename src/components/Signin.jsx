@@ -93,11 +93,26 @@ const Signin = () => {
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
-            onSubmit={(values,  onSubmitProps ) => {
-              console.log('Form Data', values)
-              console.log('Submit Props', onSubmitProps)
+            onSubmit={(values, onSubmitProps) => {
+              console.log("Form Data", values);
+              console.log("Submit Props", onSubmitProps);
+              fetch("http://localhost:8080/signup", {
+                method: "POST",
+                body: JSON.stringify(values),
+                headers: {
+                  "Content-Type": "application/json",
+                  Accept: "application/json",
+                },
+              })
+                .then((response) => {
+                  console.log(response);
+                })
+                .catch((error) => {
+                  console.error(error);
+                });
+
               onSubmitProps.setSubmitting(false);
-              onSubmitProps.reset();
+              onSubmitProps.resetForm();
             }}
           >
             {({ isSubmitting }) => (
