@@ -71,13 +71,13 @@ input:focus {
     padding: 0;
   }
   input {
-    height: 2rem;
+    height: 2.5rem;
     width: 100%;
     max-width: 100%;
     border-radius: 2rem;
     border: 1px solid #ccc;
     padding-left: 0.5rem;
-    font-size: 0.5rem;
+    font-size: 0.9rem;
   }
   label {
     text-align: left;
