@@ -7,16 +7,13 @@ import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
 import Logo from "./common/Logo";
+import { Link } from "react-router-dom";
 
 const drawerWidth = 240;
-const navItems = ["Home", "About", "Pricing", "Sign In"];
 
 function Navbar(props) {
   const { window } = props;
@@ -34,13 +31,18 @@ function Navbar(props) {
       <Logo />
       <Divider />
       <List>
-        {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
-            <ListItemButton sx={{ textAlign: "center", color: "#fff" }}>
-              <ListItemText primary={item} />
-            </ListItemButton>
-          </ListItem>
-        ))}
+        <Button sx={{ color: "#fff" }} component={Link} to="/">
+          Home
+        </Button>
+        <Button sx={{ color: "#fff" }} component={Link} to="/">
+          About
+        </Button>
+        <Button sx={{ color: "#fff" }} component={Link} to="/">
+          Pricing
+        </Button>
+        <Button sx={{ color: "#fff" }} component={Link} to="/signin">
+          Sign In
+        </Button>
         <Button
           sx={{
             color: "#fff",
@@ -50,6 +52,8 @@ function Navbar(props) {
             border: "none",
             background: "#E59446",
           }}
+          component={Link}
+          to="/signup"
         >
           Sign Up
         </Button>
@@ -78,11 +82,18 @@ function Navbar(props) {
             <Logo />
           </Box>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
-            {navItems.map((item) => (
-              <Button key={item} sx={{ color: "#fff" }}>
-                {item}
-              </Button>
-            ))}
+            <Button sx={{ color: "#fff" }} component={Link} to="/">
+              Home
+            </Button>
+            <Button sx={{ color: "#fff" }} component={Link} to="/">
+              About
+            </Button>
+            <Button sx={{ color: "#fff" }} component={Link} to="/">
+              Pricing
+            </Button>
+            <Button sx={{ color: "#fff" }} component={Link} to="/signin">
+              Sign In
+            </Button>
             <Button
               sx={{
                 color: "#fff",
@@ -92,6 +103,8 @@ function Navbar(props) {
                 border: "none",
                 background: "#E59446",
               }}
+              component={Link}
+              to="/signup"
             >
               Sign Up
             </Button>
