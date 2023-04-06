@@ -7,7 +7,6 @@ import FormImg from "./../assets/FormImg-removebg.png";
 
 const initialValues = {
   email: "",
-  password: "",
 };
 
 const validationSchema = Yup.object().shape({

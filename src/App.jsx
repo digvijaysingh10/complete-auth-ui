@@ -5,6 +5,8 @@ import LandingPage from "./components/LandingPage";
 import Navbar from "./components/Navbar";
 import Signin from "./components/Signin";
 import Signup from "./components/Signup";
+import ResetPassword from "./components/ResetPassword";
+
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -15,6 +17,7 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/signin" element={<Signin />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/reset" element={<ResetPassword />} />
         <Route path="/forget" element={<ForgetPassword />} />
       </Routes>
       <Footer />
