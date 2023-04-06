@@ -4,8 +4,8 @@ import * as Yup from "yup";
 import { SubmitButton } from "./common/Button";
 import FormImg from "./../assets/FormImg-removebg.png";
 import styled from "styled-components";
-import axios from "axios";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const BottomLinks = styled.div`
   display: flex;
@@ -50,8 +50,8 @@ const validationSchema = Yup.object().shape({
 });
 
 const Signup = () => {
-
-  const url = 'http://localhost:8080';
+  const url = "http://localhost:8080";
+  const navigate = useNavigate();
 
   return (
     <Box>
@@ -109,29 +109,22 @@ const Signup = () => {
             onSubmit={async (formdata, { setSubmitting }) => {
               // make an API call to sign up the user
               setSubmitting(false);
-              const res = await axios(url + '/user/add', {
-                method: 'POST',
+              const res = await fetch(url + "/user/add", {
+                method: "POST",
                 body: JSON.stringify(formdata),
                 headers: {
-                  'Content-Type': 'application/json'
-                }
-              })
+                  "Content-Type": "application/json",
+                },
+              });
               console.log(res.status);
-              if(res.status===201){
+              if (res.status === 201) {
                 //success alert
-                Swal.fire(
-                  'Hurray!',
-                  'Signup Successful',
-                  'success'
-                )
-                console.log('signup success');
-              }else{
+                Swal.fire("Hurray!", "Signup Successful", "success");
+                console.log("signup success");
+                navigate("/signin");
+              } else {
                 // fail alert
-                Swal.fire(
-                  'Oops...',
-                  'Signup Unsuccessful',
-                  'error'
-                )
+                Swal.fire("Oops...", "Signup Unsuccessful", "error");
               }
             }}
           >
@@ -199,7 +192,7 @@ const Signup = () => {
                   disabled={isSubmitting}
                   sx={{ width: "100%", mt: "2rem" }}
                 >
-                  {isSubmitting ? "Signing in..." : "Sign in"}
+                  {isSubmitting ? "Signing up..." : "Sign up"}
                 </SubmitButton>
               </Form>
             )}

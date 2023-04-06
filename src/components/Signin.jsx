@@ -6,15 +6,14 @@ import FormImg from "./../assets/FormImg-removebg.png";
 import styled from "styled-components";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 
 const BottomLinks = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   margin-top: 2.5rem;
-  @media(max-width:480px){
-    font-size: 14px
+  @media (max-width: 480px) {
+    font-size: 14px;
   }
 `;
 
@@ -46,7 +45,7 @@ const validationSchema = Yup.object().shape({
 });
 
 const Signin = () => {
-  const url = 'http://localhost:8080';
+  const url = "http://localhost:8080";
   const navigate = useNavigate();
   return (
     <Box>
@@ -101,37 +100,26 @@ const Signin = () => {
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
-            onSubmit={async(formdata, { setSubmitting }) => {
-              // make an API call to login the user
+            onSubmit={async (formdata, { setSubmitting }) => {
               setSubmitting(false);
-              const res = await axios(url+'/user/auth', {
-                method: 'POST',
-                body : JSON.stringify(formdata),
+              const res = await fetch(url + "/user/auth", {
+                method: "POST",
+                body: JSON.stringify(formdata),
                 headers: {
-                  'Content-Type' : 'application/json'
-                }
-              })
-          
+                  "Content-Type": "application/json",
+                },
+              });
+
               console.log(res.status);
-              if(res.status===201){
+              if (res.status === 201) {
                 const userdata = (await res.json()).result;
                 //success alert
-                Swal.fire(
-                  'Hurray!',
-                  'Login Successful',
-                  'success'
-                )
+                Swal.fire("Hurray!", "Login Successful", "success");
                 console.log(userdata);
                 navigate("/");
-                
-                
-              }else{
+              } else {
                 // fail alert
-                Swal.fire(
-                  'Oops...',
-                  'Login Unsuccessful',
-                  'error'
-                )
+                Swal.fire("Oops...", "Login Unsuccessful", "error");
               }
             }}
           >
