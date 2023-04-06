@@ -1,12 +1,13 @@
 import { Box, Typography, Button, Stack } from "@mui/material";
 import { Link } from "react-router-dom";
+import screenImg from "./../assets/screen.png";
 
 const LandingPage = () => {
   return (
     <>
       <Box
         sx={{
-          height: "100vh",
+          height: "auto",
           width: "100vw",
           background: "#0f212ebe",
         }}
@@ -39,7 +40,7 @@ const LandingPage = () => {
               color: "#fff",
               height: "2.5rem",
               width: "8rem",
-              mt: "5rem",
+              mt: {xs: '1.5rem', sm: '3rem', md:'5rem'},
               borderRadius: "2rem",
               border: "none",
               background: "#E59446",
@@ -47,6 +48,15 @@ const LandingPage = () => {
           >
             Start Now
           </Button>
+          <Stack
+            sx={{
+              background: `url(${screenImg}) center`,
+              backgroundSize: "cover",
+              marginTop: {xs: '1.5rem', sm: '3rem', md:'5rem'},
+              height: {xs:'10rem', sm:'20rem', md:'30rem'},
+              width: {xs:'15rem', sm:'27rem', md:'45rem'}
+            }}
+          ></Stack>
         </Stack>
       </Box>
     </>
