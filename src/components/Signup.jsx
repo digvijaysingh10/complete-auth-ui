@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import { SubmitButton } from "./common/Button";
 import FormImg from "./../assets/FormImg-removebg.png";
 import styled from "styled-components";
+import axios from "axios"
 
 const BottomLinks = styled.div`
   display: flex;
@@ -101,26 +102,30 @@ const Signup = () => {
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
-            onSubmit={(values, onSubmitProps) => {
+            onSubmit={ async(values, onSubmitProps) => {
+              try{
               console.log("Form Data", values);
               console.log("Submit Props", onSubmitProps);
-              fetch("http://localhost:8080/signup", {
+              const res = await axios({
                 method: "POST",
-                body: JSON.stringify(values),
-                headers: {
-                  "Content-Type": "application/json",
-                  Accept: "application/json",
+                url: "http://localhost:8080/signup",
+        
+                data: {
+                  email: values.email,
+                  password: values.password
                 },
+              }).then((response) => {
+                console.log(response);
               })
-                .then((response) => {
-                  console.log(response);
-                })
-                .catch((error) => {
-                  console.error(error);
-                });
+              .catch((error) => {
+                console.error(error);
+              });
 
               onSubmitProps.setSubmitting(false);
               onSubmitProps.resetForm();
+              }catch(err){console.log(
+                "err",err
+              );}
             }}
           >
             {({ isSubmitting }) => (
