@@ -1,15 +1,17 @@
-const { Schema, model } = require("../connection");
+const { Schema, model } = require("../config/connection");
 const bcrypt = require("bcrypt");
 const SALT = 10;
 
 const userSchema = new Schema({
   email: { type: String, required: true, unique: true },
-  password: { type: String, required: true }
-});
+  password: { type: String, required: true },
+  verified: { type: Boolean, default: false }
+},
+  { timestamps: true });
 
 userSchema.pre("save", function (next) {
   let user = this;
-  
+
   if (!user.isModified("password")) {
     console.log("Password was not modified");
     return next();
