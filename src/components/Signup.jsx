@@ -5,7 +5,6 @@ import { SubmitButton } from "./common/Button";
 import FormImg from "./../assets/FormImg-removebg.png";
 import styled from "styled-components";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
 
 const BottomLinks = styled.div`
   display: flex;
@@ -21,6 +20,8 @@ const LinkGroup = styled.div`
 `;
 
 const initialValues = {
+  firstname:"",
+  lastname:"",
   email: "",
   password: "",
   confirmPassword: "",
@@ -50,8 +51,7 @@ const validationSchema = Yup.object().shape({
 });
 
 const Signup = () => {
-  const url = "http://localhost:8080" || "http://172.16.1.217:8080";
-  const navigate = useNavigate();
+  const url = "http://localhost:8080";
 
   return (
     <Box>
@@ -108,7 +108,7 @@ const Signup = () => {
             validationSchema={validationSchema}
             onSubmit={async (formdata, { setSubmitting }) => {
               setSubmitting(false);
-              const res = await fetch(url + "/user/add", {
+              const res = await fetch(url + "/users/signup", {
                 method: "POST",
                 body: JSON.stringify(formdata),
                 headers: {
@@ -118,9 +118,12 @@ const Signup = () => {
               console.log(res.status);
               if (res.status === 201) {
                 //success alert
-                Swal.fire("Hurray!", "Signup Successful", "success");
-                console.log("signup success");
-                navigate("/signin");
+                Swal.fire({
+                  icon: "success",
+                  title: "Verification link sent!",
+                  text: "Verify the link to register.",
+                });
+                console.log("Verification link sent to your email.");
               } else {
                 // fail alert
                 Swal.fire("Oops...", "Signup Unsuccessful", "error");
@@ -138,6 +141,38 @@ const Signup = () => {
                 >
                   Sign Up
                 </Typography>
+                <div className="form-control" sx={{ mb: "1rem" }}>
+                  <label htmlFor="text">
+                    Firstname<span className="req">*</span>
+                  </label>
+                  <Field
+                    name="firstname"
+                    type="text"
+                    placeholder="Enter your first name"
+                    className="firstname-field"
+                  />
+                  <ErrorMessage
+                    name="firstname"
+                    component="div"
+                    className="error"
+                  />
+                </div>
+                <div className="form-control" sx={{ mb: "1rem" }}>
+                  <label htmlFor="text">
+                    Lastname<span className="req">*</span>
+                  </label>
+                  <Field
+                    name="lastname"
+                    type="text"
+                    placeholder="Enter your first name"
+                    className="lastname-field"
+                  />
+                  <ErrorMessage
+                    name="lastname"
+                    component="div"
+                    className="error"
+                  />
+                </div>
                 <div className="form-control" sx={{ mb: "1rem" }}>
                   <label htmlFor="email">
                     Email address<span className="req">*</span>

@@ -47,7 +47,7 @@ const validationSchema = Yup.object().shape({
 });
 
 const Signin = () => {
-  const url = "http://localhost:8080" || "http://172.16.1.217:8080";
+  const url = "http://localhost:8080";
   const navigate = useNavigate();
   return (
     <Box>
@@ -104,7 +104,7 @@ const Signin = () => {
             validationSchema={validationSchema}
             onSubmit={async (formdata, { setSubmitting }) => {
               setSubmitting(false);
-              const res = await fetch(url + "/user/auth", {
+              const res = await fetch(url + "/users/signin", {
                 method: "POST",
                 body: JSON.stringify(formdata),
                 headers: {
