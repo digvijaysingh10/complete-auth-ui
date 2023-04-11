@@ -38,13 +38,13 @@ function Navbar(props) {
           alignItems: "center",
         }}
       >
-        <Button sx={{ color: "#fff" }} component={Link} to="/">
+        <Button sx={{ color: "#fff" }} component={Link} to="/home">
           Home
         </Button>
-        <Button sx={{ color: "#fff" }} component={Link} to="/">
+        <Button sx={{ color: "#fff" }} component={Link} to="/about">
           About
         </Button>
-        <Button sx={{ color: "#fff" }} component={Link} to="/">
+        <Button sx={{ color: "#fff" }} component={Link} to="/pricing">
           Pricing
         </Button>
         <Button sx={{ color: "#fff" }} component={Link} to="/signin">
@@ -89,13 +89,13 @@ function Navbar(props) {
             <Logo />
           </Box>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
-            <Button sx={{ color: "#fff" }} component={Link} to="/">
+            <Button sx={{ color: "#fff" }} component={Link} to="/home">
               Home
             </Button>
-            <Button sx={{ color: "#fff" }} component={Link} to="/">
+            <Button sx={{ color: "#fff" }} component={Link} to="/about">
               About
             </Button>
-            <Button sx={{ color: "#fff" }} component={Link} to="/">
+            <Button sx={{ color: "#fff" }} component={Link} to="/pricing">
               Pricing
             </Button>
             <Button sx={{ color: "#fff" }} component={Link} to="/signin">
