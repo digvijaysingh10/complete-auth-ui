@@ -115,7 +115,7 @@ const Signin = () => {
               if (res.status === 200) {
                 const token = res.headers.get("auth-token");
                 localStorage.setItem("auth-token", token);
-                navigate("/dashboard"); // Redirect to dashboard page after successful login
+                navigate("/"); // Redirect to home page after successful login
               } else {
                 const errorMessage = await res.text();
                 Swal.fire("Oops!", errorMessage, "error");
