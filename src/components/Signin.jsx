@@ -112,16 +112,13 @@ const Signin = () => {
                 },
               });
 
-              console.log(res.status);
-              if (res.status === 201) {
-                const userdata = (await res.json()).result;
-                //success alert
-                Swal.fire("Hurray!", "Login Successful", "success");
-                console.log(userdata);
-                navigate("/");
+              if (res.status === 200) {
+                const token = res.headers.get("auth-token");
+                localStorage.setItem("auth-token", token);
+                navigate("/dashboard"); // Redirect to dashboard page after successful login
               } else {
-                // fail alert
-                Swal.fire("Oops...", "Invalid credentials", "error");
+                const errorMessage = await res.text();
+                Swal.fire("Oops!", errorMessage, "error");
               }
             }}
           >
@@ -172,6 +169,7 @@ const Signin = () => {
                 </div>
 
                 <SubmitButton
+                  type="submit"
                   disabled={isSubmitting}
                   sx={{ width: "100%", marginTop: "2rem" }}
                 >
@@ -192,26 +190,6 @@ const Signin = () => {
               Forget password?
             </Button>
             <LinkGroup>
-              {/* <Button
-                sx={{
-                  color: "#8d8d8da4",
-                  textTransform: "none",
-                }}
-                component={Link}
-                to="/forget"
-              >
-                Contact us
-              </Button>
-              <Button
-                sx={{
-                  color: "#8d8d8da4",
-                  textTransform: "none",
-                }}
-                component={Link}
-                to="/forget"
-              >
-                Terms
-              </Button> */}
               <Button
                 sx={{
                   color: "#8d8d8da4",
