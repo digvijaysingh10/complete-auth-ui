@@ -3,8 +3,6 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { SubmitButton } from "./common/Button";
 import FormImg from "./../assets/FormImg-removebg.png";
-/* import { useNavigate } from "react-router-dom"; */
-/* import styled from "styled-components";*/
 import Swal from "sweetalert2"; 
 
 const initialValues = {
@@ -30,7 +28,6 @@ const validationSchema = Yup.object().shape({
 
 const ResetPassword = () => {
   const url = "http://localhost:8080";
-  /*  const navigate = useNavigate(); */
 
   return (
     <Box>
@@ -85,24 +82,35 @@ const ResetPassword = () => {
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
-             onSubmit={async (formdata, { setSubmitting }) => {
-              setSubmitting(false);
-              const res = await fetch(url + "/users/resetpassword", {
-                method: "POST",
-                body: JSON.stringify(formdata),
-                headers: {
-                  "Content-Type": "application/json",
-                },
-              });
-              console.log(res.status);
-              if (res.status === 201) {
-                //success alert
-                Swal.fire("Hurray!", "Signup Successful", "success");
-                console.log("signup success");
-                // navigate("/signin");
-              } else {
-                // fail alert
-                Swal.fire("Oops...", "Signup Unsuccessful", "error");
+              onSubmit={async (formdata, { setSubmitting, resetForm }) => {
+              try {
+                setSubmitting(true);
+                const res = await fetch(url + "/users/resetpassword", {
+                  method: "POST",
+                  body: JSON.stringify(formdata),
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                });
+                console.log(res.status);
+                if (res.status === 201) {
+                  //success alert
+                  Swal.fire({
+                    icon: "success",
+                    title: "Password Changed",
+                    text: "Successfully!!!",
+                  });
+                  console.log("Password changed");
+                  resetForm();
+                } else {
+                  // fail alert
+                  Swal.fire("Oops...", "Try Again!!!", "error");
+                }
+              } catch (error) {
+                console.error(error);
+                Swal.fire("Oops...", "Try Again!!!", "error");
+              } finally {
+                setSubmitting(false);
               }
             }}
           >

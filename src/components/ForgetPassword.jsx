@@ -74,25 +74,35 @@ const ForgetPassword = () => {
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
-            onSubmit={async (formdata, { setSubmitting }) => {
-              setSubmitting(false);
-              const res = await fetch(url + "/users/reset", {
-                method: "POST",
-                body: JSON.stringify(formdata),
-                headers: {
-                  "Content-Type": "application/json",
-                },
-              });
-
-              console.log(res.status);
-              if (res.status === 201) {
-                const userdata = (await res.json()).result;
-                //success alert
-                Swal.fire("Hurray!", "OTP sent", "success");
-                console.log(userdata);
-              } else {
-                // fail alert
-                Swal.fire("Oops...", "Email not registered", "error");
+            onSubmit={async (formdata, { setSubmitting, resetForm }) => {
+              try {
+                setSubmitting(true);
+                const res = await fetch(url + "/users/reset", {
+                  method: "POST",
+                  body: JSON.stringify(formdata),
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                });
+                console.log(res.status);
+                if (res.status === 201) {
+                  //success alert
+                  Swal.fire({
+                    icon: "success",
+                    title: "Reset link sent!",
+                    text: "Verify the link to reset password.",
+                  });
+                  console.log("Reset link sent to your email.");
+                  resetForm();
+                } else {
+                  // fail alert
+                  Swal.fire("Oops...", "Link not sent", "error");
+                }
+              } catch (error) {
+                console.error(error);
+                Swal.fire("Oops...", "Link not sent", "error");
+              } finally {
+                setSubmitting(false);
               }
             }}
           >
@@ -129,7 +139,7 @@ const ForgetPassword = () => {
                   disabled={isSubmitting}
                   sx={{ width: "100%", marginTop: "2rem" }}
                 >
-                  {isSubmitting ? "Sending OTP..." : "Send OTP"}
+                  {isSubmitting ? "Sending Link..." : "Send Link"}
                 </SubmitButton>
               </Form>
             )}
