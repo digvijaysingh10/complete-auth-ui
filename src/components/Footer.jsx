@@ -19,7 +19,7 @@ const Footer = () => {
         }}
       >
         <Grid container spacing={1}>
-          <Grid item sm={12} md={3}>
+          <Grid item xs={12} sm={12} md={3} lg={3}>
             <Logo />
             <Box sx={{ color: "#fff", mt: 2 }}>
               <InstagramIcon sx={{ fontSize: "2rem", mr: 1 }} />
@@ -28,7 +28,7 @@ const Footer = () => {
               <LinkedInIcon sx={{ fontSize: "2rem" }} />
             </Box>
           </Grid>
-          <Grid item sm={12} md={3}>
+          <Grid item xs={12} sm={12} md={3} lg={3}>
             <Typography
               variant="h5"
               component="h1"
@@ -39,20 +39,20 @@ const Footer = () => {
             >
               Company & Team
             </Typography>
-            <ul>
-              <li style={{ fontSize: "1rem", fontWeight: "500" }}>About</li>
-              <li style={{ fontSize: "1rem", fontWeight: "500" }}>
-                News & Blog
-              </li>
-              <li style={{ fontSize: "1rem", fontWeight: "500" }}>
-                Press about us
-              </li>
-              <li style={{ fontSize: "1rem", fontWeight: "500" }}>
-                Our partners
-              </li>
-            </ul>
+            <Typography variant="body1" sx={{ fontSize: "1rem", fontWeight: "500" }}>
+              About
+            </Typography>
+            <Typography variant="body1" sx={{ fontSize: "1rem", fontWeight: "500" }}>
+              News & Blog
+            </Typography>
+            <Typography variant="body1" sx={{ fontSize: "1rem", fontWeight: "500" }}>
+              Press about us
+            </Typography>
+            <Typography variant="body1" sx={{ fontSize: "1rem", fontWeight: "500" }}>
+              Our partners
+            </Typography>
           </Grid>
-          <Grid item sm={12} md={3}>
+          <Grid item xs={12} sm={12} md={3} lg={3}>
             <Typography
               variant="h5"
               component="h1"
@@ -63,17 +63,17 @@ const Footer = () => {
             >
               Help & Support
             </Typography>
-            <ul>
-              <li style={{ fontSize: "1rem", fontWeight: "500" }}>Support</li>
-              <li style={{ fontSize: "1rem", fontWeight: "500" }}>FAQ</li>
-              <li
-                style={{ fontSize: "1rem", fontWeight: "500" }}
-              >
-                Supported Exchange
-              </li>
-            </ul>
+            <Typography variant="body1" sx={{ fontSize: "1rem", fontWeight: "500" }}>
+              Support
+            </Typography>
+            <Typography variant="body1" sx={{ fontSize: "1rem", fontWeight: "500" }}>
+              FAQ
+            </Typography>
+            <Typography variant="body1" sx={{ fontSize: "1rem", fontWeight: "500" }}>
+              Supported Exchange
+            </Typography>
           </Grid>
-          <Grid item sm={12} md={3}>
+          <Grid item xs={12} sm={12} md={3} lg={3}>
             <Typography
               variant="h5"
               component="h1"
@@ -84,14 +84,12 @@ const Footer = () => {
             >
               Tool
             </Typography>
-            <ul>
-              <li style={{ fontSize: "1rem", fontWeight: "500" }}>
-                Exchange Widget
-              </li>
-              <li style={{ fontSize: "1rem", fontWeight: "500" }}>
-                Payment Button
-              </li>
-            </ul>
+            <Typography variant="body1" sx={{ fontSize: "1rem", fontWeight: "500" }}>
+              Exchange Widget
+            </Typography>
+            <Typography variant="body1" sx={{ fontSize: "1rem", fontWeight: "500" }}>
+              Payment Button
+            </Typography>
           </Grid>
         </Grid>
       </Box>
