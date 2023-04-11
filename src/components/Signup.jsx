@@ -75,7 +75,7 @@ const Signup = () => {
           md={6}
           sx={{
             background: `#0f212e url(${FormImg}) center`,
-            height: { xs: "70vh", md: "70vh" },
+            height: { xs: "70vh", md: "90vh" },
             maxWidth: { xs: "80vw", md: "70vh" },
             borderRadius: { xs: "1rem 1rem 0 0", md: "1rem 0 0 1rem" },
             display: "flex",
@@ -91,7 +91,7 @@ const Signup = () => {
           sm={12}
           md={6}
           sx={{
-            height: { xs: "70vh", md: "70vh" },
+            height: { xs: "70vh", md: "90vh" },
             maxWidth: { xs: "80vw", md: "70vh" },
             background: "#fff",
             borderRadius: { xs: "0 0 1rem 1rem", md: "0 1rem 1rem 0" },
@@ -145,7 +145,7 @@ const Signup = () => {
                   component="h1"
                   color="#23235e"
                   gutterBottom
-                  sx={{ mb: "2rem" }}
+                  sx={{ mb: "1rem" }}
                 >
                   Sign Up
                 </Typography>

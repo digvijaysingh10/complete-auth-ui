@@ -38,7 +38,7 @@ function Navbar(props) {
           alignItems: "center",
         }}
       >
-        <Button sx={{ color: "#fff" }} component={Link} to="/home">
+        <Button sx={{ color: "#fff" }} component={Link} to="/">
           Home
         </Button>
         <Button sx={{ color: "#fff" }} component={Link} to="/about">
@@ -89,7 +89,7 @@ function Navbar(props) {
             <Logo />
           </Box>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
-            <Button sx={{ color: "#fff" }} component={Link} to="/home">
+            <Button sx={{ color: "#fff" }} component={Link} to="/">
               Home
             </Button>
             <Button sx={{ color: "#fff" }} component={Link} to="/about">
