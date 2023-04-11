@@ -223,7 +223,7 @@ const Signup = () => {
                   />
                 </div>
 
-                <SubmitButton
+                <SubmitButton type="submit"
                   disabled={isSubmitting}
                   sx={{ width: "100%", mt: "2rem" }}
                 >
