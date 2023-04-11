@@ -106,28 +106,35 @@ const Signup = () => {
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
-            onSubmit={async (formdata, { setSubmitting,resetForm }) => {
-              setSubmitting(false);
-              const res = await fetch(url + "/users/signup", {
-                method: "POST",
-                body: JSON.stringify(formdata),
-                headers: {
-                  "Content-Type": "application/json",
-                },
-              });
-              console.log(res.status);
-              if (res.status === 201) {
-                //success alert
-                Swal.fire({
-                  icon: "success",
-                  title: "Verification link sent!",
-                  text: "Verify the link to register.",
+            onSubmit={async (formdata, { setSubmitting, resetForm }) => {
+              try {
+                setSubmitting(true);
+                const res = await fetch(url + "/users/signup", {
+                  method: "POST",
+                  body: JSON.stringify(formdata),
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
                 });
-                console.log("Verification link sent to your email.");
-                resetForm();
-              } else {
-                // fail alert
+                console.log(res.status);
+                if (res.status === 201) {
+                  //success alert
+                  Swal.fire({
+                    icon: "success",
+                    title: "Verification link sent!",
+                    text: "Verify the link to register.",
+                  });
+                  console.log("Verification link sent to your email.");
+                  resetForm();
+                } else {
+                  // fail alert
+                  Swal.fire("Oops...", "Signup Unsuccessful", "error");
+                }
+              } catch (error) {
+                console.error(error);
                 Swal.fire("Oops...", "Signup Unsuccessful", "error");
+              } finally {
+                setSubmitting(false);
               }
             }}
           >
