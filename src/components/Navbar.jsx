@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -12,15 +13,25 @@ import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
 import Logo from "./common/Logo";
 import { Link } from "react-router-dom";
-
 const drawerWidth = 240;
 
 function Navbar(props) {
   const { window } = props;
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
+  };
+  const [auth, setAuth] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("auth-token");
+    setAuth(token ? true : false);
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("auth-token");
+    setAuth(false);
   };
 
   const drawer = (
@@ -47,7 +58,24 @@ function Navbar(props) {
         <Button sx={{ color: "#fff" }} component={Link} to="/pricing">
           Pricing
         </Button>
-        <Button sx={{ color: "#fff" }} component={Link} to="/signin">
+        {auth ? (<>
+          <Button sx={{ color: "#fff" }} onClick={handleLogout} component={Link} to="/signout">
+          Sign out
+        </Button>
+        <Button
+          sx={{
+            color: "#fff",
+            height: "2.5rem",
+            width: "8rem",
+            borderRadius: "2rem",
+            border: "none",
+            background: "#E59446",
+          }}
+          component={Link}
+          to="/myaccount"
+        >
+          My Account
+        </Button></>):(<><Button sx={{ color: "#fff" }} component={Link} to="/signin">
           Sign In
         </Button>
         <Button
@@ -63,7 +91,7 @@ function Navbar(props) {
           to="/signup"
         >
           Sign Up
-        </Button>
+        </Button></>)}
       </List>
     </Box>
   );
@@ -98,23 +126,40 @@ function Navbar(props) {
             <Button sx={{ color: "#fff" }} component={Link} to="/pricing">
               Pricing
             </Button>
-            <Button sx={{ color: "#fff" }} component={Link} to="/signin">
-              Sign In
-            </Button>
-            <Button
-              sx={{
-                color: "#fff",
-                height: "2.5rem",
-                width: "8rem",
-                borderRadius: "2rem",
-                border: "none",
-                background: "#E59446",
-              }}
-              component={Link}
-              to="/signup"
-            >
-              Sign Up
-            </Button>
+            {auth ? (<>
+          <Button sx={{ color: "#fff" }} onClick={handleLogout} component={Link} to="/signout">
+          Sign out
+        </Button>
+        <Button
+          sx={{
+            color: "#fff",
+            height: "2.5rem",
+            width: "8rem",
+            borderRadius: "2rem",
+            border: "none",
+            background: "#E59446",
+          }}
+          component={Link}
+          to="/myaccount"
+        >
+          My Account
+        </Button></>):(<><Button sx={{ color: "#fff" }} component={Link} to="/signin">
+          Sign In
+        </Button>
+        <Button
+          sx={{
+            color: "#fff",
+            height: "2.5rem",
+            width: "8rem",
+            borderRadius: "2rem",
+            border: "none",
+            background: "#E59446",
+          }}
+          component={Link}
+          to="/signup"
+        >
+          Sign Up
+        </Button></>)}
           </Box>
         </Toolbar>
       </AppBar>
