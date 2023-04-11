@@ -106,7 +106,7 @@ const Signup = () => {
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
-            onSubmit={async (formdata, { setSubmitting }) => {
+            onSubmit={async (formdata, { setSubmitting,resetForm }) => {
               setSubmitting(false);
               const res = await fetch(url + "/users/signup", {
                 method: "POST",
@@ -124,6 +124,7 @@ const Signup = () => {
                   text: "Verify the link to register.",
                 });
                 console.log("Verification link sent to your email.");
+                resetForm();
               } else {
                 // fail alert
                 Swal.fire("Oops...", "Signup Unsuccessful", "error");
