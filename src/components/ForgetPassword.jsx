@@ -3,7 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { SubmitButton } from "./common/Button";
 import FormImg from "./../assets/FormImg-removebg.png";
-/* import Swal from "sweetalert2"; */
+import Swal from "sweetalert2";
 
 const initialValues = {
   email: "",
@@ -20,7 +20,7 @@ const validationSchema = Yup.object().shape({
 });
 
 const ForgetPassword = () => {
-  /* const url = "http://localhost:8080"; */
+  const url = "http://localhost:8080";
   return (
     <Box>
       <Grid
@@ -74,9 +74,9 @@ const ForgetPassword = () => {
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
-            /* onSubmit={async (formdata, { setSubmitting }) => {
+            onSubmit={async (formdata, { setSubmitting }) => {
               setSubmitting(false);
-              const res = await fetch(url + "/user/auth", {
+              const res = await fetch(url + "/users/reset", {
                 method: "POST",
                 body: JSON.stringify(formdata),
                 headers: {
@@ -94,7 +94,7 @@ const ForgetPassword = () => {
                 // fail alert
                 Swal.fire("Oops...", "Email not registered", "error");
               }
-            }} */
+            }}
           >
             {({ isSubmitting }) => (
               <Form>

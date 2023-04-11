@@ -4,8 +4,8 @@ import * as Yup from "yup";
 import { SubmitButton } from "./common/Button";
 import FormImg from "./../assets/FormImg-removebg.png";
 /* import { useNavigate } from "react-router-dom"; */
-/* import styled from "styled-components";
-import Swal from "sweetalert2"; */
+/* import styled from "styled-components";*/
+import Swal from "sweetalert2"; 
 
 const initialValues = {
   password: "",
@@ -29,7 +29,7 @@ const validationSchema = Yup.object().shape({
 });
 
 const ResetPassword = () => {
-  /* const url = "http://localhost:8080"; */
+  const url = "http://localhost:8080";
   /*  const navigate = useNavigate(); */
 
   return (
@@ -85,9 +85,9 @@ const ResetPassword = () => {
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
-            /*  onSubmit={async (formdata, { setSubmitting }) => {
+             onSubmit={async (formdata, { setSubmitting }) => {
               setSubmitting(false);
-              const res = await fetch(url + "/user/add", {
+              const res = await fetch(url + "/users/resetpassword", {
                 method: "POST",
                 body: JSON.stringify(formdata),
                 headers: {
@@ -99,12 +99,12 @@ const ResetPassword = () => {
                 //success alert
                 Swal.fire("Hurray!", "Signup Successful", "success");
                 console.log("signup success");
-                navigate("/signin");
+                // navigate("/signin");
               } else {
                 // fail alert
                 Swal.fire("Oops...", "Signup Unsuccessful", "error");
               }
-            }} */
+            }}
           >
             {({ isSubmitting }) => (
               <Form>
