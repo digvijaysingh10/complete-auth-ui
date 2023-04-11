@@ -59,7 +59,7 @@ function Navbar(props) {
           Pricing
         </Button>
         {auth ? (<>
-          <Button sx={{ color: "#fff" }} onClick={handleLogout} component={Link} to="/signout">
+          <Button sx={{ color: "#fff" }} onClick={handleLogout} component={Link} to="/signin">
           Sign out
         </Button>
         <Button
@@ -127,7 +127,7 @@ function Navbar(props) {
               Pricing
             </Button>
             {auth ? (<>
-          <Button sx={{ color: "#fff" }} onClick={handleLogout} component={Link} to="/signout">
+          <Button sx={{ color: "#fff" }} onClick={handleLogout} component={Link} to="/signin">
           Sign out
         </Button>
         <Button
