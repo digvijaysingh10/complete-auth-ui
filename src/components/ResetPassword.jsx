@@ -85,7 +85,7 @@ const ResetPassword = () => {
               onSubmit={async (formdata, { setSubmitting, resetForm }) => {
               try {
                 setSubmitting(true);
-                const res = await fetch(url + "/users/resetpassword", {
+                const res = await fetch(url + "/users/:id/reset/:token", {
                   method: "POST",
                   body: JSON.stringify(formdata),
                   headers: {
