@@ -23,16 +23,16 @@ function Navbar(props) {
     setMobileOpen((prevState) => !prevState);
   };
   const [auth, setAuth] = useState(false);
-
+  
+  const handleLogout = () => {
+    localStorage.removeItem("auth-token");
+    setAuth(false);
+  };
   useEffect(() => {
     const token = localStorage.getItem("auth-token");
     setAuth(token ? true : false);
   }, []);
 
-  const handleLogout = () => {
-    localStorage.removeItem("auth-token");
-    setAuth(false);
-  };
 
   const drawer = (
     <Box
