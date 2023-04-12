@@ -1,8 +1,16 @@
+import { useState, useEffect } from "react";
 import { Box, Typography, Button, Stack } from "@mui/material";
 import { Link } from "react-router-dom";
 import screenImg from "./../assets/screen.png";
 
 const LandingPage = () => {
+
+  const [auth, setAuth] = useState(false);
+  useEffect(() => {
+    const token = localStorage.getItem("auth-token");
+    setAuth(token ? true : false);
+  }, []);
+
   return (
     <>
       <Box
@@ -33,28 +41,36 @@ const LandingPage = () => {
             <span className="aio">All-in-one</span> platfrom for running{" "}
             <span className="bussiness">business</span>
           </Typography>
-          <Button
-            component={Link}
-            to="/signup"
-            sx={{
-              color: "#fff",
-              height: "2.5rem",
-              width: "8rem",
-              mt: {xs: '1.5rem', sm: '3rem', md:'5rem'},
-              borderRadius: "2rem",
-              border: "none",
-              background: "#E59446",
-            }}
-          >
-            Start Now
-          </Button>
+
+          {auth ? (
+            <></>
+          ) : (
+            <>
+              <Button
+                component={Link}
+                to="/signup"
+                sx={{
+                  color: "#fff",
+                  height: "2.5rem",
+                  width: "8rem",
+                  mt: { xs: "1.5rem", sm: "3rem", md: "5rem" },
+                  borderRadius: "2rem",
+                  border: "none",
+                  background: "#E59446",
+                }}
+              >
+                Start Now
+              </Button>
+            </>
+          )}
+
           <Stack
             sx={{
               background: `url(${screenImg}) center`,
               backgroundSize: "cover",
-              marginTop: {xs: '1.5rem', sm: '3rem', md:'5rem'},
-              height: {xs:'10rem', sm:'20rem', md:'30rem'},
-              width: {xs:'15rem', sm:'27rem', md:'45rem'}
+              marginTop: { xs: "1.5rem", sm: "3rem", md: "5rem" },
+              height: { xs: "10rem", sm: "20rem", md: "30rem" },
+              width: { xs: "15rem", sm: "27rem", md: "45rem" },
             }}
           ></Stack>
         </Stack>
