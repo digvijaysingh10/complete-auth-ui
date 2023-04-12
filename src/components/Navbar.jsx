@@ -26,6 +26,11 @@ function Navbar(props) {
   };
   const [auth, setAuth] = useState(false);
 
+  useEffect(() => {
+    const token = localStorage.getItem("auth-token");
+    setAuth(token ? true : false);
+  }, []);
+
   const handleLogout = async () => {
     await Swal.fire({
       title: 'Are you sure you want to log out?',
@@ -42,11 +47,6 @@ function Navbar(props) {
       }
     });
   };
-
-  useEffect(() => {
-    const token = localStorage.getItem("auth-token");
-    setAuth(token ? true : false);
-  }, []);
 
   const drawer = (
     <Box
