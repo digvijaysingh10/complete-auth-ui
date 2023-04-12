@@ -1,22 +1,17 @@
-import { Box, Grid, Typography } from "@mui/material";
-import Button from "@mui/material/Button";
+import { Box, Grid, Typography, Link } from "@mui/material";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { SubmitButton } from "./common/Button";
-import FormImg from "./../assets/FormImg-removebg.png";
+import { SubmitButton } from "../common/Button";
+import FormImg from "../../assets/FormImg-removebg.png";
 import styled from "styled-components";
 import Swal from "sweetalert2";
-import { Link, useNavigate } from "react-router-dom";
 
 const BottomLinks = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-top: 2.5rem;
-  @media (max-width: 480px) {
-    font-size: 10px;
-    text-align: left;
-  }
+  margin-top: 2rem;
+  padding-bottom: 2rem;
 `;
 
 const LinkGroup = styled.div`
@@ -25,8 +20,11 @@ const LinkGroup = styled.div`
 `;
 
 const initialValues = {
+  firstname:"",
+  lastname:"",
   email: "",
   password: "",
+  confirmPassword: "",
 };
 
 const validationSchema = Yup.object().shape({
@@ -44,11 +42,17 @@ const validationSchema = Yup.object().shape({
       "Password must contain min. 1 numeric, symbol, capital character."
     )
     .required("Password is required."),
+  confirmPassword: Yup.string()
+    .required("Confirm password is required.")
+    .oneOf(
+      [Yup.ref("password"), null],
+      "Confirm password must match with password"
+    ),
 });
 
-const Signin = () => {
+const Signup = () => {
   const url = "http://localhost:8080";
-  const navigate = useNavigate();
+
   return (
     <Box>
       <Grid
@@ -71,7 +75,7 @@ const Signin = () => {
           md={6}
           sx={{
             background: `#0f212e url(${FormImg}) center`,
-            height: { xs: "70vh", md: "70vh" },
+            height: { xs: "90vh", md: "90vh" },
             maxWidth: { xs: "80vw", md: "70vh" },
             borderRadius: { xs: "1rem 1rem 0 0", md: "1rem 0 0 1rem" },
             display: "flex",
@@ -87,7 +91,7 @@ const Signin = () => {
           sm={12}
           md={6}
           sx={{
-            height: { xs: "70vh", md: "70vh" },
+            height: { xs: "90vh", md: "90vh" },
             maxWidth: { xs: "80vw", md: "70vh" },
             background: "#fff",
             borderRadius: { xs: "0 0 1rem 1rem", md: "0 1rem 1rem 0" },
@@ -102,23 +106,35 @@ const Signin = () => {
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
-            onSubmit={async (formdata, { setSubmitting }) => {
-              setSubmitting(false);
-              const res = await fetch(url + "/users/signin", {
-                method: "POST",
-                body: JSON.stringify(formdata),
-                headers: {
-                  "Content-Type": "application/json",
-                },
-              });
-
-              if (res.status === 200) {
-                const token = res.headers.get("auth-token");
-                localStorage.setItem("auth-token", token);
-                navigate("/"); 
-              } else {
-                const errorMessage = await res.text();
-                Swal.fire("Oops!", errorMessage, "error");
+            onSubmit={async (formdata, { setSubmitting, resetForm }) => {
+              try {
+                setSubmitting(true);
+                const res = await fetch(url + "/users/signup", {
+                  method: "POST",
+                  body: JSON.stringify(formdata),
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                });
+                console.log(res.status);
+                if (res.status === 201) {
+                  //success alert
+                  Swal.fire({
+                    icon: "success",
+                    title: "Verification link sent!",
+                    text: "Verify the link to register.",
+                  });
+                  console.log("Verification link sent to your email.");
+                  resetForm();
+                } else {
+                  // fail alert
+                  Swal.fire("Oops...", "Signup Unsuccessful", "error");
+                }
+              } catch (error) {
+                console.error(error);
+                Swal.fire("Oops...", "Signup Unsuccessful", "error");
+              } finally {
+                setSubmitting(false);
               }
             }}
           >
@@ -129,12 +145,42 @@ const Signin = () => {
                   component="h1"
                   color="#23235e"
                   gutterBottom
-                  sx={{
-                    marginBottom: "1rem",
-                  }}
+                  sx={{ mb: "1rem" }}
                 >
-                  Sign In
+                  Sign Up
                 </Typography>
+                <div className="form-control" sx={{ mb: "1rem" }}>
+                  <label htmlFor="text">
+                    Firstname<span className="req">*</span>
+                  </label>
+                  <Field
+                    name="firstname"
+                    type="text"
+                    placeholder="Enter your first name"
+                    className="firstname-field"
+                  />
+                  <ErrorMessage
+                    name="firstname"
+                    component="div"
+                    className="error"
+                  />
+                </div>
+                <div className="form-control" sx={{ mb: "1rem" }}>
+                  <label htmlFor="text">
+                    Lastname<span className="req">*</span>
+                  </label>
+                  <Field
+                    name="lastname"
+                    type="text"
+                    placeholder="Enter your first name"
+                    className="lastname-field"
+                  />
+                  <ErrorMessage
+                    name="lastname"
+                    component="div"
+                    className="error"
+                  />
+                </div>
                 <div className="form-control" sx={{ mb: "1rem" }}>
                   <label htmlFor="email">
                     Email address<span className="req">*</span>
@@ -167,39 +213,37 @@ const Signin = () => {
                     className="error"
                   />
                 </div>
+                <div className="form-control" sx={{ mb: "1rem" }}>
+                  <label htmlFor="password">
+                    Confirm Password<span className="req">*</span>
+                  </label>
+                  <Field
+                    name="confirmPassword"
+                    type="password"
+                    placeholder="Confirm password"
+                    className="password-field"
+                  />
+                  <ErrorMessage
+                    name="confirmPassword"
+                    component="div"
+                    className="error"
+                  />
+                </div>
 
-                <SubmitButton
-                  type="submit"
+                <SubmitButton type="submit"
                   disabled={isSubmitting}
-                  sx={{ width: "100%", marginTop: "2rem" }}
+                  sx={{ width: "100%", mt: "2rem" }}
                 >
-                  {isSubmitting ? "Signing in..." : "Sign in"}
+                  {isSubmitting ? "Signing up..." : "Sign up"}
                 </SubmitButton>
               </Form>
             )}
           </Formik>
-          <BottomLinks sx={{ maxWidth: { xs: "80vw", md: "70vh" } }}>
-            <Button
-              sx={{
-                color: "#8d8d8da4",
-                textTransform: "none",
-              }}
-              component={Link}
-              to="/forget"
-            >
-              Forget password?
-            </Button>
+          <BottomLinks>
             <LinkGroup>
-              <Button
-                sx={{
-                  color: "#8d8d8da4",
-                  textTransform: "none",
-                }}
-                component={Link}
-                to="/reset"
-              >
-                Reset password?
-              </Button>
+              <Link href="#" color="#8d8d8da4" underline="none">
+                Contact us
+              </Link>
             </LinkGroup>
           </BottomLinks>
         </Grid>
@@ -208,4 +252,4 @@ const Signin = () => {
   );
 };
 
-export default Signin;
+export default Signup;

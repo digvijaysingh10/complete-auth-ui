@@ -1,11 +1,11 @@
 import "./App.css";
 import Footer from "./components/Footer";
-import ForgetPassword from "./components/ForgetPassword";
+import ForgetPassword from "./components/validations/ForgetPassword";
 import LandingPage from "./components/LandingPage";
 import Navbar from "./components/Navbar";
-import Signin from "./components/Signin";
-import Signup from "./components/Signup";
-import ResetPassword from "./components/ResetPassword";
+import Signin from "./components/validations/Signin";
+import Signup from "./components/validations/Signup";
+import ResetPassword from "./components/validations/ResetPassword";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 

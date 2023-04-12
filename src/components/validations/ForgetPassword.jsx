@@ -1,8 +1,8 @@
 import { Box, Grid, Typography} from "@mui/material";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { SubmitButton } from "./common/Button";
-import FormImg from "./../assets/FormImg-removebg.png";
+import { SubmitButton } from "../common/Button";
+import FormImg from "../../assets/FormImg-removebg.png";
 import Swal from "sweetalert2";
 
 const initialValues = {
@@ -136,6 +136,7 @@ const ForgetPassword = () => {
                   />
                 </div>
                 <SubmitButton
+                type="submit"
                   disabled={isSubmitting}
                   sx={{ width: "100%", marginTop: "2rem" }}
                 >
