@@ -17,7 +17,7 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/signin" element={<Signin />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/reset" element={<ResetPassword />} />
+        <Route path="/reset/:id/reset/:token" element={<ResetPassword />} />
         <Route path="/forget" element={<ForgetPassword />} />
       </Routes>
       <Footer />
