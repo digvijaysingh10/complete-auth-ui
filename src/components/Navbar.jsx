@@ -12,7 +12,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
 import Logo from "./common/Logo";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const drawerWidth = 240;
@@ -20,6 +20,8 @@ const drawerWidth = 240;
 function Navbar(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
+  
+  const navigate = useNavigate()
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -33,17 +35,18 @@ function Navbar(props) {
 
   const handleLogout = async () => {
     await Swal.fire({
-      title: 'Are you sure you want to log out?',
+      title: 'Are you sure you want to Sign out?',
       text: 'You will be logged out of your account.',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, log out!'
+      confirmButtonText: 'Sign out'
     }).then((result) => {
       if (result.isConfirmed) {
         localStorage.removeItem('auth-token');
         setAuth(false);
+        navigate("/signin")        
       }
     });
   };
@@ -77,8 +80,6 @@ function Navbar(props) {
             <Button
               sx={{ color: "#fff" }}
               onClick={handleLogout}
-              component={Link}
-              to="/signin"
             >
               Sign out
             </Button>
@@ -157,8 +158,6 @@ function Navbar(props) {
                 <Button
                   sx={{ color: "#fff" }}
                   onClick={handleLogout}
-                  component={Link}
-                  to="/signin"
                 >
                   Sign out
                 </Button>
