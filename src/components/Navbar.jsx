@@ -140,7 +140,7 @@ function Navbar(props) {
             background: "#E59446",
           }}
           component={Link}
-          to="/myaccount"
+          to="/changepassword"
         >
           My Account
         </Button></>):(<><Button sx={{ color: "#fff" }} component={Link} to="/signin">

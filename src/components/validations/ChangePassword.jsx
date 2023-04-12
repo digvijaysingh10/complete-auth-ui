@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 
 const initialValues = {
   oldPassword: "",
-  newPassword: "",
+  password: "",
   confirmPassword: "",
 };
 
@@ -151,13 +151,13 @@ const ChangePassword = () => {
                     New Password<span className="req">*</span>
                   </label>
                   <Field
-                    name="newPassword"
+                    name="password"
                     type="password"
                     placeholder="Enter your password"
                     className="password-field"
                   />
                   <ErrorMessage
-                    name="newPassword"
+                    name="password"
                     component="div"
                     className="error"
                   />
