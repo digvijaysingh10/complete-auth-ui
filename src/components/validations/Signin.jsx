@@ -115,7 +115,8 @@ const Signin = () => {
               if (res.status === 200) {
                 const token = res.headers.get("auth-token");
                 localStorage.setItem("auth-token", token);
-                navigate("/"); 
+                navigate("/");
+                window.location.reload(); // used to reload the window to set signin to signout
               } else {
                 const errorMessage = await res.text();
                 Swal.fire("Oops!", errorMessage, "error");
