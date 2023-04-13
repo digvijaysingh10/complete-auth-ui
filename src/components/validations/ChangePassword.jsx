@@ -13,7 +13,7 @@ const initialValues = {
 
 const validationSchema = Yup.object().shape({
   oldPassword: Yup.string().required("Old password is required."),
-  newPassword: Yup.string()
+  password: Yup.string()
     .min(8)
     .matches(
       /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])(?=.*\W).{8,}$/,
@@ -23,7 +23,7 @@ const validationSchema = Yup.object().shape({
   confirmPassword: Yup.string()
     .required("Confirm password is required.")
     .oneOf(
-      [Yup.ref("newPassword"), null],
+      [Yup.ref("password"), null],
       "Confirm password must match with new password"
     ),
 });
@@ -89,7 +89,7 @@ const ChangePassword = () => {
               try {
                 setSubmitting(true);
                 const res = await fetch(url + "/users/changepassword", {
-                  method: "POST",
+                  method: "PUT",
                   body: JSON.stringify(formdata),
                   headers: {
                     "Content-Type": "application/json",
