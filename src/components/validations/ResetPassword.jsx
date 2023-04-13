@@ -86,7 +86,7 @@ const ResetPassword = () => {
               try {
                 setSubmitting(true);
                 const res = await fetch(url + "/users/:id/reset/:token", {
-                  method: "POST",
+                  method: "PUT",
                   body: JSON.stringify(formdata),
                   headers: {
                     "Content-Type": "application/json",
