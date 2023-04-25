@@ -1,12 +1,32 @@
-import { Box, Grid, Typography} from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
+import Button from "@mui/material/Button";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { SubmitButton } from "./common/Button";
-import FormImg from "./../assets/FormImg-removebg.png";
+import { SubmitButton } from "../common/Button";
+import FormImg from "../../assets/FormImg-removebg.png";
+import styled from "styled-components";
 import Swal from "sweetalert2";
+import { Link, useNavigate } from "react-router-dom";
+
+const BottomLinks = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 2.5rem;
+  @media (max-width: 480px) {
+    font-size: 10px;
+    text-align: left;
+  }
+`;
+
+const LinkGroup = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
 
 const initialValues = {
   email: "",
+  password: "",
 };
 
 const validationSchema = Yup.object().shape({
@@ -17,10 +37,18 @@ const validationSchema = Yup.object().shape({
       "Enter vailid mail."
     )
     .required("Email address is required."),
+  password: Yup.string()
+    .min(8)
+    .matches(
+      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])(?=.*\W).{8,}$/,
+      "Password must contain min. 1 numeric, symbol, capital character."
+    )
+    .required("Password is required."),
 });
 
-const ForgetPassword = () => {
+const Signin = () => {
   const url = "http://localhost:8080";
+  const navigate = useNavigate();
   return (
     <Box>
       <Grid
@@ -74,35 +102,24 @@ const ForgetPassword = () => {
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
-            onSubmit={async (formdata, { setSubmitting, resetForm }) => {
-              try {
-                setSubmitting(true);
-                const res = await fetch(url + "/users/reset", {
-                  method: "POST",
-                  body: JSON.stringify(formdata),
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                });
-                console.log(res.status);
-                if (res.status === 201) {
-                  //success alert
-                  Swal.fire({
-                    icon: "success",
-                    title: "Reset link sent!",
-                    text: "Verify the link to reset password.",
-                  });
-                  console.log("Reset link sent to your email.");
-                  resetForm();
-                } else {
-                  // fail alert
-                  Swal.fire("Oops...", "Link not sent", "error");
-                }
-              } catch (error) {
-                console.error(error);
-                Swal.fire("Oops...", "Link not sent", "error");
-              } finally {
-                setSubmitting(false);
+            onSubmit={async (formdata, { setSubmitting }) => {
+              setSubmitting(false);
+              const res = await fetch(url + "/users/signin", {
+                method: "POST",
+                body: JSON.stringify(formdata),
+                headers: {
+                  "Content-Type": "application/json",
+                },
+              });
+
+              if (res.status === 200) {
+                const token = res.headers.get("auth-token");
+                localStorage.setItem("auth-token", token);
+                navigate("/");
+                window.location.reload(); // used to reload the window to set signin to signout
+              } else {
+                const errorMessage = await res.text();
+                Swal.fire("Oops!", errorMessage, "error");
               }
             }}
           >
@@ -117,7 +134,7 @@ const ForgetPassword = () => {
                     marginBottom: "1rem",
                   }}
                 >
-                  Forget Password
+                  Sign In
                 </Typography>
                 <div className="form-control" sx={{ mb: "1rem" }}>
                   <label htmlFor="email">
@@ -135,19 +152,61 @@ const ForgetPassword = () => {
                     className="error"
                   />
                 </div>
+                <div className="form-control" sx={{ mb: "1rem" }}>
+                  <label htmlFor="password">
+                    Password<span className="req">*</span>
+                  </label>
+                  <Field
+                    name="password"
+                    type="password"
+                    placeholder="Enter your password"
+                    className="password-field"
+                  />
+                  <ErrorMessage
+                    name="password"
+                    component="div"
+                    className="error"
+                  />
+                </div>
+
                 <SubmitButton
+                  type="submit"
                   disabled={isSubmitting}
                   sx={{ width: "100%", marginTop: "2rem" }}
                 >
-                  {isSubmitting ? "Sending Link..." : "Send Link"}
+                  {isSubmitting ? "Signing in..." : "Sign in"}
                 </SubmitButton>
               </Form>
             )}
           </Formik>
+          <BottomLinks sx={{ maxWidth: { xs: "80vw", md: "70vh" } }}>
+            <Button
+              sx={{
+                color: "#8d8d8da4",
+                textTransform: "none",
+              }}
+              component={Link}
+              to="/forget"
+            >
+              Forget password?
+            </Button>
+            <LinkGroup>
+              <Button
+                sx={{
+                  color: "#8d8d8da4",
+                  textTransform: "none",
+                }}
+                component={Link}
+                to="/reset"
+              >
+                Reset password?
+              </Button>
+            </LinkGroup>
+          </BottomLinks>
         </Grid>
       </Grid>
     </Box>
   );
 };
 
-export default ForgetPassword;
+export default Signin;

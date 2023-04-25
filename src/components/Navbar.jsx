@@ -12,12 +12,16 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
 import Logo from "./common/Logo";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+
 const drawerWidth = 240;
 
 function Navbar(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
+  
+  const navigate = useNavigate()
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -29,9 +33,22 @@ function Navbar(props) {
     setAuth(token ? true : false);
   }, []);
 
-  const handleLogout = () => {
-    localStorage.removeItem("auth-token");
-    setAuth(false);
+  const handleLogout = async () => {
+    await Swal.fire({
+      title: 'Are you sure you want to Sign out?',
+      text: 'You will be logged out of your account.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sign out'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        localStorage.removeItem('auth-token');
+        setAuth(false);
+        navigate("/signin")        
+      }
+    });
   };
 
   const drawer = (
@@ -58,40 +75,50 @@ function Navbar(props) {
         <Button sx={{ color: "#fff" }} component={Link} to="/pricing">
           Pricing
         </Button>
-        {auth ? (<>
-          <Button sx={{ color: "#fff" }} onClick={handleLogout} component={Link} to="/signin">
-          Sign out
-        </Button>
-        <Button
-          sx={{
-            color: "#fff",
-            height: "2.5rem",
-            width: "8rem",
-            borderRadius: "2rem",
-            border: "none",
-            background: "#E59446",
-          }}
-          component={Link}
-          to="/myaccount"
-        >
-          My Account
-        </Button></>):(<><Button sx={{ color: "#fff" }} component={Link} to="/signin">
-          Sign In
-        </Button>
-        <Button
-          sx={{
-            color: "#fff",
-            height: "2.5rem",
-            width: "8rem",
-            borderRadius: "2rem",
-            border: "none",
-            background: "#E59446",
-          }}
-          component={Link}
-          to="/signup"
-        >
-          Sign Up
-        </Button></>)}
+        {auth ? (
+          <>
+            <Button
+              sx={{ color: "#fff" }}
+              onClick={handleLogout}
+            >
+              Sign out
+            </Button>
+            <Button
+              sx={{
+                color: "#fff",
+                height: "2.5rem",
+                width: "8rem",
+                borderRadius: "2rem",
+                border: "none",
+                background: "#E59446",
+              }}
+              component={Link}
+              to="/myaccount"
+            >
+              My Account
+            </Button>
+          </>
+        ) : (
+          <>
+            <Button sx={{ color: "#fff" }} component={Link} to="/signin">
+              Sign In
+            </Button>
+            <Button
+              sx={{
+                color: "#fff",
+                height: "2.5rem",
+                width: "8rem",
+                borderRadius: "2rem",
+                border: "none",
+                background: "#E59446",
+              }}
+              component={Link}
+              to="/signup"
+            >
+              Sign Up
+            </Button>
+          </>
+        )}
       </List>
     </Box>
   );
@@ -126,40 +153,50 @@ function Navbar(props) {
             <Button sx={{ color: "#fff" }} component={Link} to="/pricing">
               Pricing
             </Button>
-            {auth ? (<>
-          <Button sx={{ color: "#fff" }} onClick={handleLogout} component={Link} to="/signin">
-          Sign out
-        </Button>
-        <Button
-          sx={{
-            color: "#fff",
-            height: "2.5rem",
-            width: "8rem",
-            borderRadius: "2rem",
-            border: "none",
-            background: "#E59446",
-          }}
-          component={Link}
-          to="/myaccount"
-        >
-          My Account
-        </Button></>):(<><Button sx={{ color: "#fff" }} component={Link} to="/signin">
-          Sign In
-        </Button>
-        <Button
-          sx={{
-            color: "#fff",
-            height: "2.5rem",
-            width: "8rem",
-            borderRadius: "2rem",
-            border: "none",
-            background: "#E59446",
-          }}
-          component={Link}
-          to="/signup"
-        >
-          Sign Up
-        </Button></>)}
+            {auth ? (
+              <>
+                <Button
+                  sx={{ color: "#fff" }}
+                  onClick={handleLogout}
+                >
+                  Sign out
+                </Button>
+                <Button
+                  sx={{
+                    color: "#fff",
+                    height: "2.5rem",
+                    width: "8rem",
+                    borderRadius: "2rem",
+                    border: "none",
+                    background: "#E59446",
+                  }}
+                  component={Link}
+                  to="/changepassword"
+                >
+                  My Account
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button sx={{ color: "#fff" }} component={Link} to="/signin">
+                  Sign In
+                </Button>
+                <Button
+                  sx={{
+                    color: "#fff",
+                    height: "2.5rem",
+                    width: "8rem",
+                    borderRadius: "2rem",
+                    border: "none",
+                    background: "#E59446",
+                  }}
+                  component={Link}
+                  to="/signup"
+                >
+                  Sign Up
+                </Button>
+              </>
+            )}
           </Box>
         </Toolbar>
       </AppBar>
@@ -173,7 +210,7 @@ function Navbar(props) {
             keepMounted: true, // Better open performance on mobile.
           }}
           sx={{
-            display: { xs: "block", sm: "none" },
+            display: { xs: "block", sm: "block", md: "none" },
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
